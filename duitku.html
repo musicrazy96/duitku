@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DuitKu</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FFFDF9;--surface:#FFF8F0;--card:#FFFFFF;--page:#FFF3E8;
+  --border:#F0E6D8;--border2:#E8D5C0;--ink:#2C1A0E;--muted:#9C7E6A;
+  --accent:#E8804A;--accent-light:#FFF0E6;--accent2:#D4537E;
+  --green:#2E9E6A;--green-light:#EDFAF3;--red:#D04040;--red-light:#FDEAEA;
+  --amber:#C47B20;--amber-light:#FEF6E4;--blue:#3A7BD5;--blue-light:#EEF4FF;
+}
+body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;margin:0 auto;min-height:100vh;color:var(--ink)}
+
+/* SCREENS */
+.screen{display:none;flex-direction:column;min-height:100vh}
+.screen.active{display:flex}
+
+/* LOGIN */
+.login-wrap{min-height:100vh;background:var(--page);display:flex;align-items:center;justify-content:center;padding:20px}
+.login-card{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:32px 28px;width:100%;max-width:360px}
+.login-logo{text-align:center;margin-bottom:24px}
+.brand-name{font-size:26px;font-weight:800;color:var(--accent)}
+.brand-name span{color:var(--accent2)}
+.brand-sub{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* TOPBAR */
+.topbar{background:var(--card);border-bottom:1.5px solid var(--border);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}
+.brand-row{display:flex;align-items:center;gap:8px}
+.topbar-brand{font-size:18px;font-weight:800;color:var(--accent)}
+.topbar-brand span{color:var(--accent2)}
+.topbar-greeting{font-size:10px;color:var(--muted);font-weight:500}
+.month-nav{display:flex;align-items:center;gap:5px}
+.mnbtn{background:var(--surface);border:1.5px solid var(--border2);border-radius:10px;width:26px;height:26px;cursor:pointer;font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:center;font-weight:700;border:1.5px solid var(--border2)}
+.month-lbl{font-size:11px;font-weight:700;color:var(--ink);min-width:52px;text-align:center}
+
+/* CONTENT */
+.content{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px;padding-bottom:80px}
+
+/* CARDS */
+.card{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:14px 16px}
+.card-title{font-size:10px;font-weight:700;color:var(--muted);margin-bottom:10px;letter-spacing:0.08em;text-transform:uppercase}
+
+/* BALANCE */
+.balance-big{font-size:34px;font-weight:800;color:var(--ink);letter-spacing:-1px;line-height:1}
+.balance-rm{font-size:18px;font-weight:600;color:var(--muted);margin-right:2px}
+.chips-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.chip{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:9px 12px}
+.chip .lbl{font-size:10px;font-weight:600;color:var(--muted);margin-bottom:2px}
+.chip .val{font-size:15px;font-weight:700}
+
+/* GOAL */
+.goal-row{display:flex;align-items:center;gap:8px;margin-top:10px}
+.goal-lbl{font-size:10px;font-weight:600;color:var(--muted);white-space:nowrap}
+.goal-track{flex:1;height:6px;background:var(--surface);border-radius:10px;overflow:hidden}
+.goal-fill{height:100%;background:var(--green);border-radius:10px;transition:width 0.5s}
+.goal-pct{font-size:10px;font-weight:700;color:var(--green);white-space:nowrap}
+
+/* BUDGET */
+.bitem{margin-bottom:10px}.bitem:last-child{margin-bottom:0}
+.brow{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.bcat{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--ink)}
+.bdot{width:8px;height:8px;border-radius:50%}
+.bamt{font-size:11px;font-weight:500;color:var(--muted)}
+.bamt b{color:var(--ink);font-weight:700}
+.btrack{height:6px;background:var(--surface);border-radius:10px;overflow:hidden}
+.bfill{height:100%;border-radius:10px;transition:width 0.5s}
+.warn-pill{background:var(--red-light);border:1.5px solid var(--red);border-radius:12px;padding:7px 12px;margin-bottom:10px;font-size:11px;font-weight:600;color:var(--red);display:flex;align-items:center;gap:6px}
+
+/* TRANSACTIONS */
+.txn{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1.5px solid var(--border)}
+.txn:last-child{border-bottom:none}
+.txn-ico{width:36px;height:36px;border-radius:12px;background:var(--surface);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.txn-body{flex:1;min-width:0}
+.txn-name{font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.txn-date{font-size:10px;color:var(--muted);margin-top:1px;font-weight:500}
+.txn-amt{font-size:12px;font-weight:700;white-space:nowrap}
+.badge{font-size:9px;padding:2px 6px;border-radius:6px;margin-left:4px;font-weight:700;vertical-align:middle}
+.badge.auto{background:var(--green-light);color:var(--green)}
+.badge.split{background:var(--blue-light);color:var(--blue)}
+
+/* INSIGHTS */
+.igrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.icard{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:10px 12px}
+.ilabel{font-size:10px;font-weight:600;color:var(--muted);margin-bottom:3px}
+.ival{font-size:14px;font-weight:700;color:var(--ink)}
+.isub{font-size:10px;color:var(--muted);font-weight:500;margin-top:1px}
+
+/* HISTORY */
+.hist-month{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin:8px 0 6px}
+
+/* TABS */
+.tabs{display:flex;gap:4px;background:var(--surface);border-radius:14px;padding:4px;border:1.5px solid var(--border);margin-bottom:12px}
+.tab{flex:1;text-align:center;padding:7px 2px;font-size:11px;font-weight:700;border-radius:10px;cursor:pointer;color:var(--muted);transition:all 0.15s}
+.tab.active{background:var(--card);color:var(--accent);border:1.5px solid var(--border)}
+
+/* BOTTOM NAV */
+.bottomnav{background:var(--card);border-top:1.5px solid var(--border);display:flex;justify-content:space-around;align-items:center;padding:10px 0 18px;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:20}
+.navitem{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1}
+.navico{font-size:18px}
+.navlbl{font-size:9px;font-weight:700;color:var(--muted)}
+.navitem.active .navlbl{color:var(--accent)}
+.fab{width:46px;height:46px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:-14px;cursor:pointer;border:3px solid var(--page);box-shadow:0 4px 12px rgba(232,128,74,0.35)}
+.fab span{font-size:22px;color:#fff;line-height:1}
+
+/* FORMS */
+.form-field{margin-bottom:10px}
+.form-label{font-size:10px;font-weight:700;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em;display:block}
+.form-input{width:100%;background:var(--surface);border:1.5px solid var(--border2);border-radius:12px;padding:10px 12px;font-size:13px;font-weight:500;color:var(--ink);font-family:'Nunito',sans-serif;outline:none}
+.form-input:focus{border-color:var(--accent)}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
+.cat-btn{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:7px 4px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;text-align:center;transition:all 0.15s;font-family:'Nunito',sans-serif}
+.cat-btn.sel{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
+.action-btn{width:100%;background:var(--accent);color:#fff;border:none;border-radius:14px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:4px;transition:opacity 0.15s}
+.action-btn:disabled{opacity:0.5;cursor:not-allowed}
+.action-btn.sec{background:var(--surface);color:var(--ink);border:1.5px solid var(--border2)}
+.two-col{display:flex;gap:8px}
+.two-col > div{flex:1}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:100;align-items:flex-end;justify-content:center}
+.overlay.show{display:flex}
+.modal{background:var(--card);border-radius:24px 24px 0 0;padding:20px 16px 32px;width:100%;max-width:430px;border-top:2px solid var(--border);max-height:90vh;overflow-y:auto}
+.modal-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+.modal-close{cursor:pointer;color:var(--muted);font-size:22px;line-height:1;font-weight:400;background:none;border:none;font-family:'Nunito',sans-serif}
+
+/* SETTINGS */
+.settings-section{margin-bottom:4px}
+
+/* MSG */
+.msg{border-radius:10px;padding:8px 12px;font-size:12px;font-weight:600;margin-bottom:12px}
+.msg.err{background:var(--red-light);border:1.5px solid var(--red);color:var(--red)}
+.msg.ok{background:var(--green-light);border:1.5px solid var(--green);color:var(--green)}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:28px 20px;color:var(--muted);font-size:13px}
+.empty-icon{font-size:32px;margin-bottom:8px}
+
+/* UTILS */
+.val-g{color:var(--green)}.val-r{color:var(--red)}
+.text-center{text-align:center}
+.mt-8{margin-top:8px}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="screen-login" class="screen active">
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-logo">
+        <svg width="60" height="60" viewBox="0 0 40 40" style="margin:0 auto 8px;display:block">
+          <ellipse cx="20" cy="26" rx="14" ry="13" fill="#5DD98A" stroke="#1a1a1a" stroke-width="2"/>
+          <rect x="13" y="10" width="14" height="7" rx="3" fill="#5DD98A" stroke="#1a1a1a" stroke-width="2"/>
+          <rect x="11" y="12" width="18" height="5" rx="2.5" fill="#FAEDB8" stroke="#1a1a1a" stroke-width="1.5"/>
+          <circle cx="20" cy="27" r="7" fill="#F5E06A" stroke="#1a1a1a" stroke-width="1.8"/>
+          <text x="20" y="31" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1a1a">$</text>
+          <ellipse cx="15" cy="20" rx="2.2" ry="2.2" fill="white" stroke="#1a1a1a" stroke-width="1.2"/>
+          <ellipse cx="15.4" cy="20.3" rx="1" ry="1" fill="#1a1a1a"/>
+          <ellipse cx="25" cy="20" rx="2.2" ry="2.2" fill="white" stroke="#1a1a1a" stroke-width="1.2"/>
+          <ellipse cx="25.4" cy="20.3" rx="1" ry="1" fill="#1a1a1a"/>
+          <ellipse cx="12.5" cy="23" rx="2.5" ry="1.4" fill="#FF9DAE" opacity="0.6"/>
+          <ellipse cx="27.5" cy="23" rx="2.5" ry="1.4" fill="#FF9DAE" opacity="0.6"/>
+          <ellipse cx="20" cy="22" rx="1.2" ry="0.9" fill="#1a1a1a"/>
+        </svg>
+        <div class="brand-name">duit<span>ku</span></div>
+        <div class="brand-sub" id="login-sub">Login untuk teruskan</div>
+      </div>
+      <div id="login-msg"></div>
+      <div class="form-field">
+        <label class="form-label">Email</label>
+        <input class="form-input" id="login-email" type="email" placeholder="korang@email.com">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Password</label>
+        <input class="form-input" id="login-password" type="password" placeholder="••••••••">
+      </div>
+      <button class="action-btn" id="login-btn" onclick="handleAuth()">Login ✓</button>
+      <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--muted)">
+        <span id="toggle-text">Belum ada akaun? </span>
+        <span onclick="toggleMode()" style="color:var(--accent);font-weight:700;cursor:pointer" id="toggle-link">Daftar sini</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="screen-app" class="screen">
+
+  <!-- HOME TAB -->
+  <div id="tab-home">
+    <div class="topbar">
+      <div class="brand-row">
+        <svg width="36" height="36" viewBox="0 0 40 40">
+          <ellipse cx="20" cy="26" rx="14" ry="13" fill="#5DD98A" stroke="#1a1a1a" stroke-width="2"/>
+          <rect x="13" y="10" width="14" height="7" rx="3" fill="#5DD98A" stroke="#1a1a1a" stroke-width="2"/>
+          <rect x="11" y="12" width="18" height="5" rx="2.5" fill="#FAEDB8" stroke="#1a1a1a" stroke-width="1.5"/>
+          <circle cx="20" cy="27" r="7" fill="#F5E06A" stroke="#1a1a1a" stroke-width="1.8"/>
+          <text x="20" y="31" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1a1a">$</text>
+          <ellipse cx="15" cy="20" rx="2.2" ry="2.2" fill="white" stroke="#1a1a1a" stroke-width="1.2"/>
+          <ellipse cx="15.4" cy="20.3" rx="1" ry="1" fill="#1a1a1a"/>
+          <ellipse cx="25" cy="20" rx="2.2" ry="2.2" fill="white" stroke="#1a1a1a" stroke-width="1.2"/>
+          <ellipse cx="25.4" cy="20.3" rx="1" ry="1" fill="#1a1a1a"/>
+          <ellipse cx="12.5" cy="23" rx="2.5" ry="1.4" fill="#FF9DAE" opacity="0.6"/>
+          <ellipse cx="27.5" cy="23" rx="2.5" ry="1.4" fill="#FF9DAE" opacity="0.6"/>
+          <ellipse cx="20" cy="22" rx="1.2" ry="0.9" fill="#1a1a1a"/>
+        </svg>
+        <div>
+          <div class="topbar-brand">duit<span>ku</span></div>
+          <div class="topbar-greeting" id="greeting">Helo ✨</div>
+        </div>
+      </div>
+      <div class="month-nav">
+        <button class="mnbtn" onclick="changeMonth(-1)">‹</button>
+        <span class="month-lbl" id="month-label">Mei 2026</span>
+        <button class="mnbtn" onclick="changeMonth(1)">›</button>
+      </div>
+    </div>
+    <div class="content">
+      <!-- Balance -->
+      <div class="card">
+        <div class="card-title">Baki bulan ini</div>
+        <div class="balance-big"><span class="balance-rm">RM</span><span id="home-balance">0.00</span></div>
+        <div class="goal-row">
+          <span class="goal-lbl">Saving goal</span>
+          <div class="goal-track"><div class="goal-fill" id="goal-fill" style="width:0%"></div></div>
+          <span class="goal-pct" id="goal-pct">0%</span>
+        </div>
+        <div class="chips-row">
+          <div class="chip"><div class="lbl">Masuk</div><div class="val val-g" id="home-income">RM 0.00</div></div>
+          <div class="chip"><div class="lbl">Keluar</div><div class="val val-r" id="home-expense">RM 0.00</div></div>
+        </div>
+      </div>
+      <!-- Budget -->
+      <div class="card">
+        <div class="card-title">Budget limit</div>
+        <div id="budget-warn" style="display:none" class="warn-pill"><span>⚠️</span><span id="budget-warn-text"></span></div>
+        <div id="budget-bars">
+          <div class="empty"><div class="empty-icon">📊</div>Set budget kat Settings dulu!</div>
+        </div>
+      </div>
+      <!-- Recent Txn -->
+      <div class="card">
+        <div class="card-title">Transaksi terkini</div>
+        <div id="recent-txns"><div class="empty"><div class="empty-icon">🌸</div>Belum ada transaksi lagi<br><small>Tambah transaksi pertama korang!</small></div></div>
+      </div>
+      <!-- Insights -->
+      <div class="card">
+        <div class="card-title">Insights</div>
+        <div class="igrid">
+          <div class="icard"><div class="ilabel">Hari paling boros</div><div class="ival" id="ins-day">—</div></div>
+          <div class="icard"><div class="ilabel">Kategori teratas</div><div class="ival" id="ins-cat">—</div></div>
+          <div class="icard"><div class="ilabel">Hutang belum settle</div><div class="ival val-r" id="ins-debt">RM 0</div></div>
+          <div class="icard"><div class="ilabel">Total transaksi</div><div class="ival" id="ins-total">0</div><div class="isub">bulan ini</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY TAB -->
+  <div id="tab-history" style="display:none">
+    <div class="topbar">
+      <div class="brand-row">
+        <svg width="36" height="36" viewBox="0 0 40 40">
+          <ellipse cx="20" cy="26" rx="14" ry="13" fill="#5DD98A" stroke="#1a1a1a" stroke-width="2"/>
+          <rect x="13" y="10" width="14" height="7" rx="3" fill="#5DD98A" stroke="#1a1a1a" stroke-width="2"/>
+          <rect x="11" y="12" width="18" height="5" rx="2.5" fill="#FAEDB8" stroke="#1a1a1a" stroke-width="1.5"/>
+          <circle cx="20" cy="27" r="7" fill="#F5E06A" stroke="#1a1a1a" stroke-width="1.8"/>
+          <text x="20" y="31" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1a1a">$</text>
+          <ellipse cx="15" cy="20" rx="2.2" ry="2.2" fill="white" stroke="#1a1a1a" stroke-width="1.2"/>
+          <ellipse cx="15.4" cy="20.3" rx="1" ry="1" fill="#1a1a1a"/>
+          <ellipse cx="25" cy="20" rx="2.2" ry="2.2" fill="white" stroke="#1a1a1a" stroke-width="1.2"/>
+          <ellipse cx="25.4" cy="20.3" rx="1" ry="1" fill="#1a1a1a"/>
+          <ellipse cx="12.5" cy="23" rx="2.5" ry="1.4" fill="#FF9DAE" opacity="0.6"/>
+          <ellipse cx="27.5" cy="23" rx="2.5" ry="1.4" fill="#FF9DAE" opacity="0.6"/>
+          <ellipse cx="20" cy="22" rx="1.2" ry="0.9" fill="#1a1a1a"/>
+        </svg>
+        <div>
+          <div class="topbar-brand">duit<span>ku</span></div>
+          <div class="topbar-greeting">Semua transaksi</div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div id="history-list"><div class="empty"><div class="empty-icon">🕐</div>Belum ada history lagi</div></div>
+    </div>
+  </div>
+
+  <!-- SETTINGS TAB -->
+  <div id="tab-settings" style="display:none">
+    <div class="topbar">
+      <div class="brand-row">
+        <svg width="36" height="36" viewBox="0 0 40 40">
+          <ellipse cx="20" cy="26" rx="14" ry="13" fill="#5DD98A" stroke="#1a1a1a" stroke-width="2"/>
+          <rect x="13" y="10" width="14" height="7" rx="3" fill="#5DD98A" stroke="#1a1a1a" stroke-width="2"/>
+          <rect x="11" y="12" width="18" height="5" rx="2.5" fill="#FAEDB8" stroke="#1a1a1a" stroke-width="1.5"/>
+          <circle cx="20" cy="27" r="7" fill="#F5E06A" stroke="#1a1a1a" stroke-width="1.8"/>
+          <text x="20" y="31" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1a1a">$</text>
+          <ellipse cx="15" cy="20" rx="2.2" ry="2.2" fill="white" stroke="#1a1a1a" stroke-width="1.2"/>
+          <ellipse cx="15.4" cy="20.3" rx="1" ry="1" fill="#1a1a1a"/>
+          <ellipse cx="25" cy="20" rx="2.2" ry="2.2" fill="white" stroke="#1a1a1a" stroke-width="1.2"/>
+          <ellipse cx="25.4" cy="20.3" rx="1" ry="1" fill="#1a1a1a"/>
+          <ellipse cx="12.5" cy="23" rx="2.5" ry="1.4" fill="#FF9DAE" opacity="0.6"/>
+          <ellipse cx="27.5" cy="23" rx="2.5" ry="1.4" fill="#FF9DAE" opacity="0.6"/>
+          <ellipse cx="20" cy="22" rx="1.2" ry="0.9" fill="#1a1a1a"/>
+        </svg>
+        <div>
+          <div class="topbar-brand">duit<span>ku</span></div>
+          <div class="topbar-greeting">Tetapan</div>
+        </div>
+      </div>
+      <button onclick="logout()" style="background:var(--surface);border:1.5px solid var(--border2);border-radius:10px;padding:6px 12px;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Nunito',sans-serif">Logout</button>
+    </div>
+    <div class="content">
+      <div class="card">
+        <div class="card-title">Profil</div>
+        <div class="form-field"><label class="form-label">Nama</label><input class="form-input" id="set-name" placeholder="Nama korang"></div>
+        <div class="form-field"><label class="form-label">Gaji bulanan (RM)</label><input class="form-input" id="set-salary" type="number" placeholder="0.00"></div>
+        <div class="form-field"><label class="form-label">Saving goal (RM)</label><input class="form-input" id="set-goal" type="number" placeholder="0.00"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Budget limits</div>
+        <div class="form-field"><label class="form-label">Makan (RM)</label><input class="form-input" id="bud-makan" type="number" placeholder="0"></div>
+        <div class="form-field"><label class="form-label">Transport (RM)</label><input class="form-input" id="bud-transport" type="number" placeholder="0"></div>
+        <div class="form-field"><label class="form-label">Groceries (RM)</label><input class="form-input" id="bud-groceries" type="number" placeholder="0"></div>
+        <div class="form-field"><label class="form-label">Hiburan (RM)</label><input class="form-input" id="bud-hiburan" type="number" placeholder="0"></div>
+        <div class="form-field"><label class="form-label">Bil & subscription (RM)</label><input class="form-input" id="bud-bil" type="number" placeholder="0"></div>
+      </div>
+      <div id="settings-msg"></div>
+      <button class="action-btn" onclick="saveSettings()">Simpan settings ✓</button>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottomnav">
+    <div class="navitem active" id="nav-home" onclick="switchTab('home')"><div class="navico">🏠</div><div class="navlbl">Home</div></div>
+    <div class="navitem" id="nav-history" onclick="switchTab('history')"><div class="navico">🕐</div><div class="navlbl">History</div></div>
+    <div class="fab" onclick="showAddModal()"><span>+</span></div>
+    <div class="navitem" id="nav-settings" onclick="switchTab('settings')"><div class="navico">⚙️</div><div class="navlbl">Setting</div></div>
+  </div>
+</div>
+
+<!-- ADD TRANSACTION MODAL -->
+<div class="overlay" id="add-modal">
+  <div class="modal">
+    <div class="modal-title">Tambah transaksi <button class="modal-close" onclick="hideAddModal()">×</button></div>
+    <div class="form-field"><label class="form-label">Nama / penerangan</label><input class="form-input" id="add-name" placeholder="e.g. Lunch nasi lemak"></div>
+    <div class="form-field"><label class="form-label">Amaun (RM)</label><input class="form-input" id="add-amount" type="number" placeholder="0.00"></div>
+    <div class="form-field">
+      <label class="form-label">Kategori</label>
+      <div class="cat-grid" id="cat-grid">
+        <button class="cat-btn" onclick="selCat(this,'Makan')">🍜 Makan</button>
+        <button class="cat-btn" onclick="selCat(this,'Transport')">🚗 Transport</button>
+        <button class="cat-btn" onclick="selCat(this,'Groceries')">🛒 Groceries</button>
+        <button class="cat-btn" onclick="selCat(this,'Hiburan')">🎮 Hiburan</button>
+        <button class="cat-btn" onclick="selCat(this,'Bil')">📱 Bil</button>
+        <button class="cat-btn" onclick="selCat(this,'Lain')">📦 Lain</button>
+      </div>
+    </div>
+    <div class="two-col" style="margin-bottom:10px">
+      <div><label class="form-label">Jenis</label>
+        <select class="form-input" id="add-type">
+          <option value="out">Keluar 💸</option>
+          <option value="in">Masuk 💰</option>
+        </select>
+      </div>
+      <div><label class="form-label">Tarikh</label><input class="form-input" id="add-date" type="date"></div>
+    </div>
+    <div style="display:flex;gap:6px;margin-bottom:6px">
+      <label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer">
+        <input type="checkbox" id="add-recurring"> Auto/Recurring
+      </label>
+      <label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;margin-left:12px">
+        <input type="checkbox" id="add-split"> Split bil
+      </label>
+    </div>
+    <div id="add-msg"></div>
+    <button class="action-btn" id="add-btn" onclick="saveTransaction()">Simpan transaksi ✓</button>
+  </div>
+</div>
+
+<script>
+// ============ SUPABASE SETUP ============
+const { createClient } = supabase
+const sb = createClient(
+  'https://gdyhlsfuxvbpbeeuxyak.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdkeWhsc2Z1eHZicGJlZXV4eWFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1NjMwNDksImV4cCI6MjA5NDEzOTA0OX0.CeGZ9IkAjHxlxHDt-7aTDjBPRC7w6O2ww2N-pARFpEg'
+)
+
+// ============ STATE ============
+let currentUser = null
+let allTransactions = []
+let userProfile = {}
+let userBudgets = {}
+let isLoginMode = true
+let selectedCat = ''
+let currentMonth = new Date().getMonth()
+let currentYear = new Date().getFullYear()
+const MONTHS = ['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sep','Okt','Nov','Dis']
+const CAT_ICONS = {Makan:'🍜',Transport:'⛽',Groceries:'🛒',Hiburan:'🎮',Bil:'📱',Lain:'📦'}
+const CAT_COLORS = {Makan:'#E24B4A',Transport:'#378ADD',Groceries:'#639922',Hiburan:'#9B5DE5',Bil:'#BA7517',Lain:'#888'}
+
+// ============ AUTH ============
+function toggleMode() {
+  isLoginMode = !isLoginMode
+  document.getElementById('login-sub').textContent = isLoginMode ? 'Login untuk teruskan' : 'Create akaun baru'
+  document.getElementById('toggle-text').textContent = isLoginMode ? 'Belum ada akaun? ' : 'Dah ada akaun? '
+  document.getElementById('toggle-link').textContent = isLoginMode ? 'Daftar sini' : 'Login sini'
+  document.getElementById('login-btn').textContent = isLoginMode ? 'Login ✓' : 'Daftar ✓'
+  document.getElementById('login-msg').innerHTML = ''
+}
+
+async function handleAuth() {
+  const email = document.getElementById('login-email').value.trim()
+  const password = document.getElementById('login-password').value
+  const btn = document.getElementById('login-btn')
+  const msgEl = document.getElementById('login-msg')
+  if (!email || !password) { showMsg(msgEl, 'Isi semua field dulu!', 'err'); return }
+  btn.disabled = true; btn.textContent = 'Loading...'
+  try {
+    let result
+    if (isLoginMode) {
+      result = await sb.auth.signInWithPassword({ email, password })
+    } else {
+      result = await sb.auth.signUp({ email, password })
+    }
+    if (result.error) {
+      showMsg(msgEl, result.error.message, 'err')
+    } else if (!isLoginMode && !result.data.session) {
+      showMsg(msgEl, 'Check email korang untuk verify account! ✅', 'ok')
+    } else {
+      currentUser = result.data.user
+      await loadApp()
+    }
+  } catch(e) { showMsg(msgEl, 'Error: ' + e.message, 'err') }
+  btn.disabled = false
+  btn.textContent = isLoginMode ? 'Login ✓' : 'Daftar ✓'
+}
+
+async function logout() {
+  await sb.auth.signOut()
+  currentUser = null; allTransactions = []; userProfile = {}; userBudgets = {}
+  document.getElementById('screen-app').classList.remove('active')
+  document.getElementById('screen-login').classList.add('active')
+}
+
+// ============ APP LOAD ============
+async function loadApp() {
+  document.getElementById('screen-login').classList.remove('active')
+  document.getElementById('screen-app').classList.add('active')
+  await loadProfile()
+  await loadBudgets()
+  await loadTransactions()
+  renderHome()
+  updateMonthLabel()
+}
+
+async function loadProfile() {
+  const { data } = await sb.from('profiles').select('*').eq('id', currentUser.id).single()
+  if (data) {
+    userProfile = data
+    document.getElementById('greeting').textContent = 'Helo, ' + (data.name || currentUser.email.split('@')[0]) + ' ✨'
+    document.getElementById('set-name').value = data.name || ''
+    document.getElementById('set-salary').value = data.salary || ''
+    document.getElementById('set-goal').value = data.saving_goal || ''
+  }
+}
+
+async function loadBudgets() {
+  const { data } = await sb.from('budgets').select('*').eq('user_id', currentUser.id)
+  userBudgets = {}
+  if (data) data.forEach(b => userBudgets[b.category] = b.limit_amount)
+  document.getElementById('bud-makan').value = userBudgets['Makan'] || ''
+  document.getElementById('bud-transport').value = userBudgets['Transport'] || ''
+  document.getElementById('bud-groceries').value = userBudgets['Groceries'] || ''
+  document.getElementById('bud-hiburan').value = userBudgets['Hiburan'] || ''
+  document.getElementById('bud-bil').value = userBudgets['Bil'] || ''
+}
+
+async function loadTransactions() {
+  const { data } = await sb.from('transactions').select('*').eq('user_id', currentUser.id).order('date', { ascending: false })
+  allTransactions = data || []
+}
+
+// ============ RENDER HOME ============
+function renderHome() {
+  const monthTxns = allTransactions.filter(t => {
+    const d = new Date(t.date)
+    return d.getMonth() === currentMonth && d.getFullYear() === currentYear
+  })
+  const income = monthTxns.filter(t => t.type === 'in').reduce((a,b) => a + b.amount, 0)
+  const expense = monthTxns.filter(t => t.type === 'out').reduce((a,b) => a + b.amount, 0)
+  const balance = income - expense
+  const goal = userProfile.saving_goal || 0
+
+  document.getElementById('home-balance').textContent = balance.toFixed(2)
+  document.getElementById('home-income').textContent = 'RM ' + income.toFixed(2)
+  document.getElementById('home-expense').textContent = 'RM ' + expense.toFixed(2)
+
+  // Goal bar
+  const pct = goal > 0 ? Math.min(100, Math.round((balance / goal) * 100)) : 0
+  document.getElementById('goal-fill').style.width = pct + '%'
+  document.getElementById('goal-pct').textContent = pct + '%'
+
+  // Budget bars
+  renderBudgetBars(monthTxns)
+
+  // Recent txns
+  renderRecentTxns(monthTxns.slice(0, 5))
+
+  // Insights
+  renderInsights(monthTxns)
+}
+
+function renderBudgetBars(monthTxns) {
+  const cats = Object.keys(userBudgets)
+  const el = document.getElementById('budget-bars')
+  const warnEl = document.getElementById('budget-warn')
+  const warnText = document.getElementById('budget-warn-text')
+
+  if (cats.length === 0) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">📊</div>Set budget kat Settings dulu!</div>'
+    warnEl.style.display = 'none'; return
+  }
+
+  let warns = []
+  let html = ''
+  cats.forEach(cat => {
+    const limit = userBudgets[cat]
+    const spent = monthTxns.filter(t => t.type === 'out' && t.category === cat).reduce((a,b) => a+b.amount, 0)
+    const pct = Math.min(100, Math.round((spent / limit) * 100))
+    const color = CAT_COLORS[cat] || '#888'
+    if (pct >= 80) warns.push(cat + ' dah ' + pct + '%')
+    html += `<div class="bitem">
+      <div class="brow"><div class="bcat"><div class="bdot" style="background:${color}"></div>${cat}</div><div class="bamt"><b>RM ${spent.toFixed(0)}</b> / ${limit}</div></div>
+      <div class="btrack"><div class="bfill" style="width:${pct}%;background:${color}"></div></div>
+    </div>`
+  })
+  el.innerHTML = html
+  if (warns.length > 0) { warnEl.style.display = 'flex'; warnText.textContent = '⚠️ ' + warns.join(', ') + ' — almost limit!' }
+  else warnEl.style.display = 'none'
+}
+
+function renderRecentTxns(txns) {
+  const el = document.getElementById('recent-txns')
+  if (txns.length === 0) { el.innerHTML = '<div class="empty"><div class="empty-icon">🌸</div>Belum ada transaksi lagi<br><small>Tambah transaksi pertama korang!</small></div>'; return }
+  el.innerHTML = txns.map(t => `
+    <div class="txn">
+      <div class="txn-ico">${CAT_ICONS[t.category] || '💰'}</div>
+      <div class="txn-body">
+        <div class="txn-name">${t.name}${t.is_recurring ? '<span class="badge auto">Auto</span>' : ''}${t.is_split ? '<span class="badge split">Split</span>' : ''}</div>
+        <div class="txn-date">${t.date} · ${t.category || 'Lain'}</div>
+      </div>
+      <div class="txn-amt ${t.type === 'in' ? 'val-g' : 'val-r'}">${t.type === 'in' ? '+' : '-'}RM ${t.amount.toFixed(2)}</div>
+    </div>`).join('')
+}
+
+function renderInsights(monthTxns) {
+  const outTxns = monthTxns.filter(t => t.type === 'out')
+  // Top day
+  const dayCount = {}
+  outTxns.forEach(t => { const d = new Date(t.date); const day = ['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu'][d.getDay()]; dayCount[day] = (dayCount[day]||0) + t.amount })
+  const topDay = Object.entries(dayCount).sort((a,b) => b[1]-a[1])[0]
+  document.getElementById('ins-day').textContent = topDay ? topDay[0] : '—'
+  // Top cat
+  const catCount = {}
+  outTxns.forEach(t => { catCount[t.category] = (catCount[t.category]||0) + t.amount })
+  const topCat = Object.entries(catCount).sort((a,b) => b[1]-a[1])[0]
+  document.getElementById('ins-cat').textContent = topCat ? (CAT_ICONS[topCat[0]] || '') + ' ' + topCat[0] : '—'
+  // Total
+  document.getElementById('ins-total').textContent = monthTxns.length
+}
+
+// ============ HISTORY ============
+function renderHistory() {
+  const el = document.getElementById('history-list')
+  if (allTransactions.length === 0) { el.innerHTML = '<div class="empty"><div class="empty-icon">🕐</div>Belum ada history lagi</div>'; return }
+  const grouped = {}
+  allTransactions.forEach(t => {
+    const d = new Date(t.date)
+    const key = MONTHS[d.getMonth()] + ' ' + d.getFullYear()
+    if (!grouped[key]) grouped[key] = []
+    grouped[key].push(t)
+  })
+  let html = ''
+  Object.entries(grouped).forEach(([month, txns]) => {
+    const inc = txns.filter(t=>t.type==='in').reduce((a,b)=>a+b.amount,0)
+    const exp = txns.filter(t=>t.type==='out').reduce((a,b)=>a+b.amount,0)
+    const bal = inc - exp
+    html += `<div class="hist-month">${month}</div>
+    <div class="card" style="margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+        <span style="font-size:14px;font-weight:700;color:var(--ink)">${month}</span>
+        <span style="font-size:12px;font-weight:700;color:${bal>=0?'var(--green)':'var(--red)'}">
+          ${bal>=0?'Saved':'Over'} RM ${Math.abs(bal).toFixed(0)} ${bal>=0?'🎉':'😬'}
+        </span>
+      </div>
+      ${txns.map(t => `
+        <div class="txn">
+          <div class="txn-ico">${CAT_ICONS[t.category]||'💰'}</div>
+          <div class="txn-body">
+            <div class="txn-name">${t.name}${t.is_recurring?'<span class="badge auto">Auto</span>':''}${t.is_split?'<span class="badge split">Split</span>':''}</div>
+            <div class="txn-date">${t.date} · ${t.category||'Lain'}</div>
+          </div>
+          <div class="txn-amt ${t.type==='in'?'val-g':'val-r'}">${t.type==='in'?'+':'-'}RM ${t.amount.toFixed(2)}</div>
+        </div>`).join('')}
+    </div>`
+  })
+  el.innerHTML = html
+}
+
+// ============ ADD TRANSACTION ============
+function showAddModal() {
+  document.getElementById('add-date').value = new Date().toISOString().split('T')[0]
+  document.getElementById('add-name').value = ''
+  document.getElementById('add-amount').value = ''
+  document.getElementById('add-type').value = 'out'
+  document.getElementById('add-recurring').checked = false
+  document.getElementById('add-split').checked = false
+  document.getElementById('add-msg').innerHTML = ''
+  selectedCat = ''
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('sel'))
+  document.getElementById('add-modal').classList.add('show')
+}
+function hideAddModal() { document.getElementById('add-modal').classList.remove('show') }
+function selCat(el, cat) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('sel'))
+  el.classList.add('sel'); selectedCat = cat
+}
+
+async function saveTransaction() {
+  const name = document.getElementById('add-name').value.trim()
+  const amount = document.getElementById('add-amount').value
+  const type = document.getElementById('add-type').value
+  const date = document.getElementById('add-date').value
+  const msgEl = document.getElementById('add-msg')
+  const btn = document.getElementById('add-btn')
+  if (!name || !amount) { showMsg(msgEl, 'Isi nama dan amaun dulu!', 'err'); return }
+  btn.disabled = true; btn.textContent = 'Saving...'
+  const { error } = await sb.from('transactions').insert({
+    user_id: currentUser.id, name, amount: parseFloat(amount),
+    type, category: selectedCat || 'Lain', date,
+    is_recurring: document.getElementById('add-recurring').checked,
+    is_split: document.getElementById('add-split').checked
+  })
+  if (error) { showMsg(msgEl, error.message, 'err') }
+  else {
+    hideAddModal()
+    await loadTransactions()
+    renderHome()
+    if (document.getElementById('tab-history').style.display !== 'none') renderHistory()
+  }
+  btn.disabled = false; btn.textContent = 'Simpan transaksi ✓'
+}
+
+// ============ SETTINGS ============
+async function saveSettings() {
+  const msgEl = document.getElementById('settings-msg')
+  const name = document.getElementById('set-name').value
+  const salary = parseFloat(document.getElementById('set-salary').value) || 0
+  const goal = parseFloat(document.getElementById('set-goal').value) || 0
+  // Save profile
+  const { error } = await sb.from('profiles').upsert({ id: currentUser.id, name, salary, saving_goal: goal })
+  if (error) { showMsg(msgEl, error.message, 'err'); return }
+  userProfile = { ...userProfile, name, salary, saving_goal: goal }
+  // Save budgets
+  const cats = ['Makan','Transport','Groceries','Hiburan','Bil']
+  const ids = ['bud-makan','bud-transport','bud-groceries','bud-hiburan','bud-bil']
+  // Delete old budgets
+  await sb.from('budgets').delete().eq('user_id', currentUser.id)
+  // Insert new ones
+  const newBudgets = cats.map((cat, i) => ({ user_id: currentUser.id, category: cat, limit_amount: parseFloat(document.getElementById(ids[i]).value) || 0 })).filter(b => b.limit_amount > 0)
+  if (newBudgets.length > 0) await sb.from('budgets').insert(newBudgets)
+  await loadBudgets()
+  document.getElementById('greeting').textContent = 'Helo, ' + (name || currentUser.email.split('@')[0]) + ' ✨'
+  renderHome()
+  showMsg(msgEl, 'Settings saved! ✓', 'ok')
+}
+
+// ============ NAV ============
+function switchTab(tab) {
+  document.querySelectorAll('[id^="tab-"]').forEach(el => el.style.display = 'none')
+  document.querySelectorAll('.navitem').forEach(el => el.classList.remove('active'))
+  document.getElementById('tab-' + tab).style.display = 'block'
+  document.getElementById('nav-' + tab).classList.add('active')
+  if (tab === 'history') renderHistory()
+}
+
+function changeMonth(dir) {
+  currentMonth += dir
+  if (currentMonth > 11) { currentMonth = 0; currentYear++ }
+  if (currentMonth < 0) { currentMonth = 11; currentYear-- }
+  updateMonthLabel()
+  renderHome()
+}
+function updateMonthLabel() {
+  document.getElementById('month-label').textContent = MONTHS[currentMonth] + ' ' + currentYear
+}
+
+// ============ UTILS ============
+function showMsg(el, text, type) {
+  el.innerHTML = `<div class="msg ${type}">${text}</div>`
+  if (type === 'ok') setTimeout(() => el.innerHTML = '', 3000)
+}
+
+// ============ INIT ============
+window.addEventListener('keydown', e => { if (e.key === 'Enter') { const login = document.getElementById('screen-login'); if (login.classList.contains('active')) handleAuth() } })
+
+// Check existing session
+;(async () => {
+  const { data: { session } } = await sb.auth.getSession()
+  if (session) { currentUser = session.user; await loadApp() }
+})()
+</script>
+</body>
+</html>
