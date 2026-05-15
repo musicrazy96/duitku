@@ -841,11 +841,38 @@ function showMsg(el,text,type){
 function hideModal(id){ document.getElementById(id).classList.remove('show') }
 
 // ============ INIT ============
+// ============ INIT ============
 window.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('screen-login').classList.contains('active')) handleAuth()})
+
+// Auto refresh session
+sb.auth.onAuthStateChange(async (event, session) => {
+  if(event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED'){
+    if(session){
+      currentUser = session.user
+      // Only reload if on login screen
+      if(document.getElementById('screen-login').classList.contains('active')){
+        await loadApp()
+      }
+    }
+  }
+  if(event === 'SIGNED_OUT'){
+    currentUser = null
+    document.getElementById('screen-app').classList.remove('active')
+    document.getElementById('screen-login').classList.add('active')
+  }
+})
+
 ;(async()=>{
-  const {data:{session}}=await sb.auth.getSession()
-  if(session){currentUser=session.user;await loadApp()}
+  const {data:{session}, error} = await sb.auth.getSession()
+  if(session){
+    currentUser = session.user
+    await loadApp()
+  } else {
+    // Try refresh
+    const {data} = await sb.auth.refreshSession()
+    if(data.session){
+      currentUser = data.session.user
+      await loadApp()
+    }
+  }
 })()
-</script>
-</body>
-</html>
