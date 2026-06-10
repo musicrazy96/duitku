@@ -8,7 +8,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-/* ===== THEME TOKENS ===== */
 :root,[data-theme="light"]{
   --bg:#FFFDF9;--surface:#FFF8F0;--card:#FFFFFF;--page:#FFF3E8;
   --border:#F0E6D8;--border2:#E8D5C0;--ink:#2C1A0E;--muted:#9C7E6A;
@@ -26,18 +25,16 @@
   --nav-bg:#1E1610;--topbar:#1E1610;
 }
 body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;margin:0 auto;min-height:100vh;color:var(--ink);transition:background 0.3s,color 0.3s}
-
-/* ===== SCREENS ===== */
 .screen{display:none;flex-direction:column;min-height:100vh}
 .screen.active{display:flex}
 
-/* ===== LOGIN ===== */
+/* LOGIN */
 .login-wrap{min-height:100vh;background:var(--page);display:flex;align-items:center;justify-content:center;padding:20px}
 .login-card{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:32px 28px;width:100%;max-width:360px}
 .brand-name{font-size:26px;font-weight:800;color:var(--accent)}
 .brand-name span{color:var(--accent2)}
 
-/* ===== TOPBAR ===== */
+/* TOPBAR */
 .topbar{background:var(--topbar);border-bottom:1.5px solid var(--border);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}
 .brand-row{display:flex;align-items:center;gap:8px}
 .brand-text{display:flex;flex-direction:column}
@@ -49,30 +46,20 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 .mnbtn{background:var(--surface);border:1.5px solid var(--border2);border-radius:10px;width:26px;height:26px;cursor:pointer;font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:center;font-weight:700}
 .month-lbl{font-size:11px;font-weight:700;color:var(--ink);min-width:52px;text-align:center}
 .theme-btn{background:var(--surface);border:1.5px solid var(--border2);border-radius:10px;padding:4px 8px;font-size:13px;cursor:pointer;font-family:'Nunito',sans-serif;color:var(--muted)}
-
-/* ===== CONTENT ===== */
 .content{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px;padding-bottom:90px}
-
-/* ===== CARDS ===== */
 .card{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:14px 16px}
 .card-title{font-size:10px;font-weight:700;color:var(--muted);margin-bottom:10px;letter-spacing:0.08em;text-transform:uppercase}
-
-/* ===== BALANCE ===== */
 .balance-big{font-size:34px;font-weight:800;color:var(--ink);letter-spacing:-1px;line-height:1}
 .balance-rm{font-size:18px;font-weight:600;color:var(--muted);margin-right:2px}
 .chips-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 .chip{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:9px 12px}
 .chip .lbl{font-size:10px;font-weight:600;color:var(--muted);margin-bottom:2px}
 .chip .val{font-size:15px;font-weight:700}
-
-/* ===== GOAL BAR ===== */
 .goal-row{display:flex;align-items:center;gap:8px;margin-top:10px}
 .goal-lbl{font-size:10px;font-weight:600;color:var(--muted);white-space:nowrap}
 .goal-track{flex:1;height:6px;background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border)}
 .goal-fill{height:100%;background:var(--green);border-radius:10px;transition:width 0.5s}
 .goal-pct{font-size:10px;font-weight:700;color:var(--green);white-space:nowrap}
-
-/* ===== BUDGET ===== */
 .bitem{margin-bottom:10px}.bitem:last-child{margin-bottom:0}
 .brow{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
 .bcat{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--ink)}
@@ -82,8 +69,6 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 .btrack{height:6px;background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border)}
 .bfill{height:100%;border-radius:10px;transition:width 0.5s}
 .warn-pill{background:var(--red-light);border:1.5px solid var(--red);border-radius:12px;padding:7px 12px;margin-bottom:10px;font-size:11px;font-weight:600;color:var(--red);display:flex;align-items:center;gap:6px}
-
-/* ===== TRANSACTIONS ===== */
 .txn{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1.5px solid var(--border)}
 .txn:last-child{border-bottom:none}
 .txn-ico{width:36px;height:36px;border-radius:12px;background:var(--surface);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
@@ -97,15 +82,11 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 .badge.auto{background:var(--green-light);color:var(--green)}
 .badge.split{background:var(--blue-light);color:var(--blue)}
 .badge.ai{background:var(--amber-light);color:var(--amber)}
-
-/* ===== INSIGHTS ===== */
 .igrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .icard{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:10px 12px}
 .ilabel{font-size:10px;font-weight:600;color:var(--muted);margin-bottom:3px}
 .ival{font-size:14px;font-weight:700;color:var(--ink)}
 .isub{font-size:10px;color:var(--muted);font-weight:500;margin-top:1px}
-
-/* ===== DEBT TRACKER ===== */
 .debt-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1.5px solid var(--border)}
 .debt-item:last-child{border-bottom:none}
 .debt-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent-light);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--accent);flex-shrink:0}
@@ -114,8 +95,6 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 .debt-note{font-size:10px;color:var(--muted);margin-top:1px}
 .debt-amt{font-size:13px;font-weight:700;color:var(--red)}
 .settle-btn{background:var(--green-light);border:1.5px solid var(--green);border-radius:8px;padding:4px 8px;font-size:10px;font-weight:700;color:var(--green);cursor:pointer;font-family:'Nunito',sans-serif}
-
-/* ===== SUBSCRIPTIONS ===== */
 .sub-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1.5px solid var(--border)}
 .sub-item:last-child{border-bottom:none}
 .sub-ico{width:34px;height:34px;border-radius:10px;background:var(--surface);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
@@ -123,21 +102,15 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 .sub-name{font-size:12px;font-weight:700;color:var(--ink)}
 .sub-date{font-size:10px;color:var(--muted);margin-top:1px}
 .sub-amt{font-size:12px;font-weight:700;color:var(--red)}
-
-/* ===== HISTORY ===== */
 .hist-month-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin:8px 0 6px}
 .hist-card{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:12px 14px;margin-bottom:8px}
 .hist-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .hist-lbl{font-size:14px;font-weight:700;color:var(--ink)}
 .mini-bars{display:flex;gap:3px;height:36px;align-items:flex-end;margin-top:4px}
 .mini-bar{flex:1;border-radius:3px 3px 0 0;min-height:3px}
-
-/* ===== AI TAB ===== */
 .tabs{display:flex;gap:4px;background:var(--surface);border-radius:14px;padding:4px;border:1.5px solid var(--border);margin-bottom:12px}
 .tab{flex:1;text-align:center;padding:7px 2px;font-size:10px;font-weight:700;border-radius:10px;cursor:pointer;color:var(--muted);transition:all 0.15s}
 .tab.active{background:var(--card);color:var(--accent);border:1.5px solid var(--border)}
-.ai-header{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px}
-.ai-sub{font-size:11px;font-weight:500;color:var(--muted);margin-bottom:12px}
 .ai-coming{text-align:center;padding:32px 20px}
 .ai-coming-icon{font-size:40px;margin-bottom:10px}
 .ai-coming-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
@@ -147,8 +120,6 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 .ai-feature-ico{font-size:18px;flex-shrink:0}
 .ai-feature-text{font-size:11px;font-weight:600;color:var(--muted)}
 .ai-feature-text b{color:var(--ink);display:block;font-size:12px;margin-bottom:1px}
-
-/* ===== BOTTOM NAV ===== */
 .bottomnav{background:var(--nav-bg);border-top:1.5px solid var(--border);display:flex;justify-content:space-around;align-items:center;padding:10px 0 18px;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:20}
 .navitem{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1}
 .navico{font-size:18px}
@@ -156,8 +127,6 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 .navitem.active .navlbl{color:var(--accent)}
 .fab{width:46px;height:46px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:-14px;cursor:pointer;border:3px solid var(--page);box-shadow:0 4px 14px rgba(232,128,74,0.4)}
 .fab span{font-size:22px;color:#fff;line-height:1}
-
-/* ===== FORMS ===== */
 .form-field{margin-bottom:10px}
 .form-label{font-size:10px;font-weight:700;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em;display:block}
 .form-input{width:100%;background:var(--surface);border:1.5px solid var(--border2);border-radius:12px;padding:10px 12px;font-size:13px;font-weight:500;color:var(--ink);font-family:'Nunito',sans-serif;outline:none}
@@ -168,35 +137,35 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 .action-btn{width:100%;background:var(--accent);color:#fff;border:none;border-radius:14px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:4px;transition:opacity 0.15s}
 .action-btn:disabled{opacity:0.5;cursor:not-allowed}
 .action-btn.sec{background:var(--surface);color:var(--ink);border:1.5px solid var(--border2)}
+.action-btn.ghost{background:none;color:var(--muted);border:none;font-size:12px;padding:8px;margin-top:2px}
 .two-col{display:flex;gap:8px}
 .two-col>div{flex:1}
-
-/* ===== MODAL ===== */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:100;align-items:flex-end;justify-content:center}
 .overlay.show{display:flex}
 .modal{background:var(--card);border-radius:24px 24px 0 0;padding:20px 16px 32px;width:100%;max-width:430px;border-top:2px solid var(--border);max-height:90vh;overflow-y:auto}
 .modal-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
 .modal-close{cursor:pointer;color:var(--muted);font-size:22px;line-height:1;background:none;border:none;font-family:'Nunito',sans-serif}
-
-/* ===== MESSAGES ===== */
 .msg{border-radius:10px;padding:8px 12px;font-size:12px;font-weight:600;margin-bottom:12px}
 .msg.err{background:var(--red-light);border:1.5px solid var(--red);color:var(--red)}
 .msg.ok{background:var(--green-light);border:1.5px solid var(--green);color:var(--green)}
-
-/* ===== EMPTY STATE ===== */
 .empty{text-align:center;padding:24px 20px;color:var(--muted);font-size:13px}
 .empty-icon{font-size:30px;margin-bottom:8px}
-
-/* ===== UTILS ===== */
 .val-g{color:var(--green)}.val-r{color:var(--red)}
 .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .add-small{background:var(--accent-light);border:1.5px solid var(--accent);border-radius:8px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--accent);cursor:pointer;font-family:'Nunito',sans-serif}
-.divider{border-top:1.5px solid var(--border);margin:8px 0;padding-top:8px;display:flex;justify-content:space-between}
+.divider{border-top:1.5px solid var(--border);margin-top:8px;padding-top:8px;display:flex;justify-content:space-between}
+/* RESET PASSWORD SCREEN */
+.reset-back{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;margin-bottom:16px;background:none;border:none;font-family:'Nunito',sans-serif;padding:0}
+.reset-back:hover{color:var(--accent)}
+.reset-step{text-align:center;margin-bottom:20px}
+.reset-step-icon{font-size:36px;margin-bottom:8px}
+.reset-step-title{font-size:16px;font-weight:800;color:var(--ink)}
+.reset-step-sub{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5}
+.pw-strength{height:4px;border-radius:2px;margin-top:6px;transition:all 0.3s}
 </style>
 </head>
 <body>
 
-<!-- REUSABLE LOGO SVG -->
 <svg width="0" height="0" style="position:absolute;overflow:hidden">
   <defs>
     <symbol id="logo" viewBox="0 0 40 40">
@@ -229,10 +198,59 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
       <div class="form-field"><label class="form-label">Email</label><input class="form-input" id="login-email" type="email" placeholder="korang@email.com"></div>
       <div class="form-field"><label class="form-label">Password</label><input class="form-input" id="login-password" type="password" placeholder="••••••••"></div>
       <button class="action-btn" id="login-btn" onclick="handleAuth()">Login ✓</button>
-      <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--muted)">
+      <!-- FORGOT PASSWORD LINK -->
+      <div style="text-align:center;margin-top:10px">
+        <button class="action-btn ghost" onclick="showForgotPassword()">Lupa password? 🔑</button>
+      </div>
+      <div style="text-align:center;margin-top:4px;font-size:12px;color:var(--muted)">
         <span id="toggle-text">Belum ada akaun? </span>
         <span onclick="toggleMode()" style="color:var(--accent);font-weight:700;cursor:pointer" id="toggle-link">Daftar sini</span>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FORGOT PASSWORD ==================== -->
+<div id="screen-forgot" class="screen">
+  <div class="login-wrap">
+    <div class="login-card">
+      <button class="reset-back" onclick="showLogin()">‹ Balik login</button>
+      <div class="reset-step">
+        <div class="reset-step-icon">🔑</div>
+        <div class="reset-step-title">Lupa Password?</div>
+        <div class="reset-step-sub">Takpe! Masukkan email korang dan kita hantar link reset password.</div>
+      </div>
+      <div id="forgot-msg"></div>
+      <div class="form-field">
+        <label class="form-label">Email</label>
+        <input class="form-input" id="forgot-email" type="email" placeholder="korang@email.com">
+      </div>
+      <button class="action-btn" id="forgot-btn" onclick="sendResetEmail()">Hantar Reset Link ✉️</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== RESET PASSWORD ==================== -->
+<div id="screen-reset" class="screen">
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="reset-step">
+        <div class="reset-step-icon">🔐</div>
+        <div class="reset-step-title">Set Password Baru</div>
+        <div class="reset-step-sub">Masukkan password baru korang. Pastikan sekurang-kurangnya 8 aksara.</div>
+      </div>
+      <div id="reset-msg"></div>
+      <div class="form-field">
+        <label class="form-label">Password Baru</label>
+        <input class="form-input" id="reset-password" type="password" placeholder="Min 8 aksara" oninput="checkPwStrength(this.value)">
+        <div id="pw-strength-bar" class="pw-strength" style="background:var(--border);width:100%"></div>
+        <div id="pw-strength-label" style="font-size:10px;color:var(--muted);margin-top:4px"></div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Confirm Password</label>
+        <input class="form-input" id="reset-confirm" type="password" placeholder="Ulang password baru">
+      </div>
+      <button class="action-btn" id="reset-btn" onclick="updatePassword()">Tukar Password ✓</button>
     </div>
   </div>
 </div>
@@ -260,7 +278,6 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
       </div>
     </div>
     <div class="content">
-      <!-- Balance Card -->
       <div class="card">
         <div class="card-title">Baki bulan ini</div>
         <div class="balance-big"><span class="balance-rm">RM</span><span id="home-balance">0.00</span></div>
@@ -274,18 +291,15 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
           <div class="chip"><div class="lbl">Keluar</div><div class="val val-r" id="home-expense">RM 0.00</div></div>
         </div>
       </div>
-      <!-- Budget Card -->
       <div class="card">
         <div class="card-title">Budget limit</div>
         <div id="budget-warn" style="display:none" class="warn-pill"><span>⚠️</span><span id="budget-warn-text"></span></div>
         <div id="budget-bars"><div class="empty"><div class="empty-icon">📊</div>Set budget kat Settings dulu!</div></div>
       </div>
-      <!-- Recent Transactions -->
       <div class="card">
         <div class="card-title">Transaksi terkini</div>
         <div id="recent-txns"><div class="empty"><div class="empty-icon">🌸</div>Belum ada transaksi lagi<br><small>Tap + untuk tambah!</small></div></div>
       </div>
-      <!-- Debt Tracker -->
       <div class="card">
         <div class="section-header">
           <div class="card-title" style="margin-bottom:0">Hutang tracker 💸</div>
@@ -297,7 +311,6 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
           <span style="font-size:13px;font-weight:700;color:var(--red)" id="debt-total">RM 0</span>
         </div>
       </div>
-      <!-- Subscriptions -->
       <div class="card">
         <div class="section-header">
           <div class="card-title" style="margin-bottom:0">Subscriptions 📱</div>
@@ -308,7 +321,6 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
           <span style="font-size:13px;font-weight:700;color:var(--red)" id="sub-total">RM 0</span>
         </div>
       </div>
-      <!-- Insights -->
       <div class="card">
         <div class="card-title">Insights bulan ini</div>
         <div class="igrid">
@@ -326,10 +338,7 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
     <div class="topbar">
       <div class="brand-row">
         <svg width="38" height="38"><use href="#logo"/></svg>
-        <div class="brand-text">
-          <div class="topbar-brand">duit<span>ku</span></div>
-          <div class="topbar-greeting">Semua transaksi</div>
-        </div>
+        <div class="brand-text"><div class="topbar-brand">duit<span>ku</span></div><div class="topbar-greeting">Semua transaksi</div></div>
       </div>
       <button class="theme-btn" onclick="toggleTheme()">🌙</button>
     </div>
@@ -338,15 +347,12 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
     </div>
   </div>
 
-  <!-- AI TAB (V2 Placeholder) -->
+  <!-- AI TAB -->
   <div id="tab-ai" style="display:none">
     <div class="topbar">
       <div class="brand-row">
         <svg width="38" height="38"><use href="#logo"/></svg>
-        <div class="brand-text">
-          <div class="topbar-brand">duit<span>ku</span></div>
-          <div class="topbar-greeting">AI Features ✨</div>
-        </div>
+        <div class="brand-text"><div class="topbar-brand">duit<span>ku</span></div><div class="topbar-greeting">AI Features ✨</div></div>
       </div>
       <button class="theme-btn" onclick="toggleTheme()">🌙</button>
     </div>
@@ -355,29 +361,14 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
         <div class="ai-coming">
           <div class="ai-coming-icon">🧠</div>
           <div class="ai-coming-title">AI Features — Coming Soon!</div>
-          <div class="ai-coming-sub">Kita tengah build AI features untuk korang.<br>Stay tuned untuk V2! 🚀</div>
+          <div class="ai-coming-sub">Tengah build AI features untuk korang.<br>Stay tuned untuk V2! 🚀</div>
         </div>
         <div class="ai-feature-list">
-          <div class="ai-feature-item">
-            <div class="ai-feature-ico">📄</div>
-            <div class="ai-feature-text"><b>Receipt Scanner</b>Snap resit — AI auto-extract & categorize</div>
-          </div>
-          <div class="ai-feature-item">
-            <div class="ai-feature-ico">📈</div>
-            <div class="ai-feature-text"><b>Spending Forecast</b>Predict perbelanjaan hujung bulan</div>
-          </div>
-          <div class="ai-feature-item">
-            <div class="ai-feature-ico">📝</div>
-            <div class="ai-feature-text"><b>Monthly Summary</b>AI tulis laporan bulan dalam BM casual</div>
-          </div>
-          <div class="ai-feature-item">
-            <div class="ai-feature-ico">🔥</div>
-            <div class="ai-feature-text"><b>Financial Roast</b>AI bagi honest & brutal spending feedback</div>
-          </div>
-          <div class="ai-feature-item">
-            <div class="ai-feature-ico">🏷️</div>
-            <div class="ai-feature-text"><b>Auto-Categorize</b>Taip nama je — AI detect kategori sendiri</div>
-          </div>
+          <div class="ai-feature-item"><div class="ai-feature-ico">📄</div><div class="ai-feature-text"><b>Receipt Scanner</b>Snap resit — AI auto-extract & categorize</div></div>
+          <div class="ai-feature-item"><div class="ai-feature-ico">📈</div><div class="ai-feature-text"><b>Spending Forecast</b>Predict perbelanjaan hujung bulan</div></div>
+          <div class="ai-feature-item"><div class="ai-feature-ico">📝</div><div class="ai-feature-text"><b>Monthly Summary</b>AI tulis laporan bulan dalam BM casual</div></div>
+          <div class="ai-feature-item"><div class="ai-feature-ico">🔥</div><div class="ai-feature-text"><b>Financial Roast</b>AI bagi honest & brutal spending feedback</div></div>
+          <div class="ai-feature-item"><div class="ai-feature-ico">🏷️</div><div class="ai-feature-text"><b>Auto-Categorize</b>Taip nama je — AI detect kategori sendiri</div></div>
         </div>
       </div>
     </div>
@@ -388,10 +379,7 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
     <div class="topbar">
       <div class="brand-row">
         <svg width="38" height="38"><use href="#logo"/></svg>
-        <div class="brand-text">
-          <div class="topbar-brand">duit<span>ku</span></div>
-          <div class="topbar-greeting">Tetapan</div>
-        </div>
+        <div class="brand-text"><div class="topbar-brand">duit<span>ku</span></div><div class="topbar-greeting">Tetapan</div></div>
       </div>
       <div style="display:flex;gap:6px;align-items:center">
         <button class="theme-btn" onclick="toggleTheme()">🌙</button>
@@ -412,6 +400,13 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
         <div class="form-field"><label class="form-label">Groceries (RM)</label><input class="form-input" id="bud-groceries" type="number" placeholder="0"></div>
         <div class="form-field"><label class="form-label">Hiburan (RM)</label><input class="form-input" id="bud-hiburan" type="number" placeholder="0"></div>
         <div class="form-field"><label class="form-label">Bil & subscription (RM)</label><input class="form-input" id="bud-bil" type="number" placeholder="0"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Tukar Password</div>
+        <div class="form-field"><label class="form-label">Password Baru</label><input class="form-input" id="chg-password" type="password" placeholder="Min 8 aksara"></div>
+        <div class="form-field"><label class="form-label">Confirm Password</label><input class="form-input" id="chg-confirm" type="password" placeholder="Ulang password baru"></div>
+        <div id="chg-pw-msg"></div>
+        <button class="action-btn sec" onclick="changePasswordFromSettings()" style="margin-top:0">Tukar Password 🔐</button>
       </div>
       <div class="card">
         <div class="card-title">Tema</div>
@@ -435,7 +430,7 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
   </div>
 </div>
 
-<!-- ==================== ADD TRANSACTION MODAL ==================== -->
+<!-- ADD TRANSACTION MODAL -->
 <div class="overlay" id="add-modal">
   <div class="modal">
     <div class="modal-title">Tambah transaksi <button class="modal-close" onclick="hideModal('add-modal')">×</button></div>
@@ -454,10 +449,7 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
     </div>
     <div class="two-col" style="margin-bottom:10px">
       <div><label class="form-label">Jenis</label>
-        <select class="form-input" id="add-type">
-          <option value="out">Keluar 💸</option>
-          <option value="in">Masuk 💰</option>
-        </select>
+        <select class="form-input" id="add-type"><option value="out">Keluar 💸</option><option value="in">Masuk 💰</option></select>
       </div>
       <div><label class="form-label">Tarikh</label><input class="form-input" id="add-date" type="date"></div>
     </div>
@@ -474,7 +466,7 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
   </div>
 </div>
 
-<!-- ==================== DEBT MODAL ==================== -->
+<!-- DEBT MODAL -->
 <div class="overlay" id="debt-modal">
   <div class="modal">
     <div class="modal-title">Tambah hutang 💸 <button class="modal-close" onclick="hideModal('debt-modal')">×</button></div>
@@ -488,34 +480,43 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 </div>
 
 <script>
-// ============ SUPABASE ============
 const { createClient } = supabase
 const sb = createClient(
-  'https://gdyhlsfuxvbpbeeuxyak.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdkeWhsc2Z1eHZicGJlZXV4eWFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1NjMwNDksImV4cCI6MjA5NDEzOTA0OX0.CeGZ9IkAjHxlxHDt-7aTDjBPRC7w6O2ww2N-pARFpEg'
+  'SUPABASE_URL_HERE',
+  'SUPABASE_ANON_KEY_HERE'
 )
 
-// ============ STATE ============
-let currentUser = null, allTransactions = [], allDebts = []
-let userProfile = {}, userBudgets = {}
-let isLoginMode = true, selectedCat = ''
-let currentMonth = new Date().getMonth(), currentYear = new Date().getFullYear()
-const MONTHS = ['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sep','Okt','Nov','Dis']
-const CAT_ICONS = {Makan:'🍜',Transport:'⛽',Groceries:'🛒',Hiburan:'🎮',Bil:'📱',Lain:'📦'}
-const CAT_COLORS = {Makan:'#E24B4A',Transport:'#378ADD',Groceries:'#639922',Hiburan:'#9B5DE5',Bil:'#BA7517',Lain:'#888'}
-const DAY_NAMES = ['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu']
+let currentUser=null,allTransactions=[],allDebts=[]
+let userProfile={},userBudgets={}
+let isLoginMode=true,selectedCat=''
+let currentMonth=new Date().getMonth(),currentYear=new Date().getFullYear()
+const MONTHS=['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sep','Okt','Nov','Dis']
+const CAT_ICONS={Makan:'🍜',Transport:'⛽',Groceries:'🛒',Hiburan:'🎮',Bil:'📱',Lain:'📦'}
+const CAT_COLORS={Makan:'#E24B4A',Transport:'#378ADD',Groceries:'#639922',Hiburan:'#9B5DE5',Bil:'#BA7517',Lain:'#888'}
+const DAY_NAMES=['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu']
 
-// ============ THEME ============
+// ===== THEME =====
 function setTheme(t){
   document.documentElement.setAttribute('data-theme',t)
   localStorage.setItem('duitku-theme',t)
-  const icon = t==='dark'?'☀️':'🌙'
-  document.querySelectorAll('.theme-btn').forEach(b=>b.textContent=icon)
+  document.querySelectorAll('.theme-btn').forEach(b=>b.textContent=t==='dark'?'☀️':'🌙')
 }
-function toggleTheme(){ setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark') }
+function toggleTheme(){setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}
 setTheme(localStorage.getItem('duitku-theme')||'light')
 
-// ============ AUTH ============
+// ===== SCREEN HELPERS =====
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'))
+  document.getElementById(id).classList.add('active')
+}
+function showLogin(){showScreen('screen-login')}
+function showForgotPassword(){
+  document.getElementById('forgot-email').value=document.getElementById('login-email').value||''
+  document.getElementById('forgot-msg').innerHTML=''
+  showScreen('screen-forgot')
+}
+
+// ===== AUTH =====
 function toggleMode(){
   isLoginMode=!isLoginMode
   document.getElementById('login-sub').textContent=isLoginMode?'Login untuk teruskan':'Create akaun baru'
@@ -538,22 +539,106 @@ async function handleAuth(){
       :await sb.auth.signUp({email,password})
     if(result.error) showMsg(msgEl,result.error.message,'err')
     else if(!isLoginMode&&!result.data.session) showMsg(msgEl,'Check email korang untuk verify! ✅','ok')
-    else{ currentUser=result.data.user; await loadApp() }
+    else{currentUser=result.data.user;await loadApp()}
   }catch(e){showMsg(msgEl,'Error: '+e.message,'err')}
   btn.disabled=false;btn.textContent=isLoginMode?'Login ✓':'Daftar ✓'
+}
+
+// ===== FORGOT PASSWORD =====
+async function sendResetEmail(){
+  const email=document.getElementById('forgot-email').value.trim()
+  const msgEl=document.getElementById('forgot-msg')
+  const btn=document.getElementById('forgot-btn')
+  if(!email){showMsg(msgEl,'Masukkan email dulu!','err');return}
+  btn.disabled=true;btn.textContent='Menghantar...'
+  try{
+    const {error}=await sb.auth.resetPasswordForEmail(email,{
+      redirectTo: window.location.origin+window.location.pathname
+    })
+    if(error) showMsg(msgEl,error.message,'err')
+    else{
+      showMsg(msgEl,'✅ Email reset dah dihantar! Check inbox (atau spam) korang.','ok')
+      btn.textContent='Dah dihantar! ✅'
+    }
+  }catch(e){showMsg(msgEl,'Error: '+e.message,'err');btn.disabled=false;btn.textContent='Hantar Reset Link ✉️'}
+}
+
+// ===== RESET PASSWORD (from email link) =====
+function checkPwStrength(pw){
+  const bar=document.getElementById('pw-strength-bar')
+  const lbl=document.getElementById('pw-strength-label')
+  if(!pw){bar.style.background='var(--border)';bar.style.width='100%';lbl.textContent='';return}
+  let score=0
+  if(pw.length>=8) score++
+  if(pw.length>=12) score++
+  if(/[A-Z]/.test(pw)) score++
+  if(/[0-9]/.test(pw)) score++
+  if(/[^A-Za-z0-9]/.test(pw)) score++
+  const levels=[
+    {color:'var(--red)',label:'Lemah 😬'},
+    {color:'var(--amber)',label:'Okay lah 😐'},
+    {color:'var(--amber)',label:'Okay lah 😐'},
+    {color:'var(--green)',label:'Kuat! 💪'},
+    {color:'var(--green)',label:'Sangat kuat! 🔒'},
+    {color:'var(--green)',label:'Sangat kuat! 🔒'},
+  ]
+  const lvl=levels[score]||levels[0]
+  bar.style.background=lvl.color
+  bar.style.width=((score+1)/5*100)+'%'
+  lbl.style.color=lvl.color
+  lbl.textContent=lvl.label
+}
+
+async function updatePassword(){
+  const pw=document.getElementById('reset-password').value
+  const confirm=document.getElementById('reset-confirm').value
+  const msgEl=document.getElementById('reset-msg')
+  const btn=document.getElementById('reset-btn')
+  if(!pw||!confirm){showMsg(msgEl,'Isi semua field!','err');return}
+  if(pw.length<8){showMsg(msgEl,'Password kena sekurang-kurangnya 8 aksara!','err');return}
+  if(pw!==confirm){showMsg(msgEl,'Password tak sama! Cuba semula.','err');return}
+  btn.disabled=true;btn.textContent='Updating...'
+  try{
+    const {error}=await sb.auth.updateUser({password:pw})
+    if(error) showMsg(msgEl,error.message,'err')
+    else{
+      showMsg(msgEl,'✅ Password berjaya ditukar! Redirecting...','ok')
+      setTimeout(async()=>{
+        const {data:{session}}=await sb.auth.getSession()
+        if(session){currentUser=session.user;await loadApp()}
+        else showLogin()
+      },2000)
+    }
+  }catch(e){showMsg(msgEl,'Error: '+e.message,'err')}
+  btn.disabled=false;btn.textContent='Tukar Password ✓'
+}
+
+// ===== CHANGE PASSWORD FROM SETTINGS =====
+async function changePasswordFromSettings(){
+  const pw=document.getElementById('chg-password').value
+  const confirm=document.getElementById('chg-confirm').value
+  const msgEl=document.getElementById('chg-pw-msg')
+  if(!pw||!confirm){showMsg(msgEl,'Isi semua field!','err');return}
+  if(pw.length<8){showMsg(msgEl,'Password kena min 8 aksara!','err');return}
+  if(pw!==confirm){showMsg(msgEl,'Password tak sama!','err');return}
+  const {error}=await sb.auth.updateUser({password:pw})
+  if(error) showMsg(msgEl,error.message,'err')
+  else{
+    showMsg(msgEl,'✅ Password berjaya ditukar!','ok')
+    document.getElementById('chg-password').value=''
+    document.getElementById('chg-confirm').value=''
+  }
 }
 
 async function logout(){
   await sb.auth.signOut()
   currentUser=null;allTransactions=[];allDebts=[];userProfile={};userBudgets={}
-  document.getElementById('screen-app').classList.remove('active')
-  document.getElementById('screen-login').classList.add('active')
+  showLogin()
 }
 
-// ============ LOAD APP ============
+// ===== LOAD APP =====
 async function loadApp(){
-  document.getElementById('screen-login').classList.remove('active')
-  document.getElementById('screen-app').classList.add('active')
+  showScreen('screen-app')
   await Promise.all([loadProfile(),loadBudgets(),loadTransactions(),loadDebts()])
   updateMonthLabel()
   renderHome()
@@ -590,10 +675,9 @@ async function loadDebts(){
   const stored=localStorage.getItem('duitku-debts-'+currentUser.id)
   allDebts=stored?JSON.parse(stored):[]
 }
+function saveDebtsLocal(){localStorage.setItem('duitku-debts-'+currentUser.id,JSON.stringify(allDebts))}
 
-function saveDebtsLocal(){ localStorage.setItem('duitku-debts-'+currentUser.id,JSON.stringify(allDebts)) }
-
-// ============ RENDER HOME ============
+// ===== RENDER HOME =====
 function renderHome(){
   const mt=allTransactions.filter(t=>{const d=new Date(t.date);return d.getMonth()===currentMonth&&d.getFullYear()===currentYear})
   const income=mt.filter(t=>t.type==='in').reduce((a,b)=>a+b.amount,0)
@@ -606,17 +690,13 @@ function renderHome(){
   const pct=goal>0?Math.min(100,Math.round((balance/goal)*100)):0
   document.getElementById('goal-fill').style.width=pct+'%'
   document.getElementById('goal-pct').textContent=pct+'%'
-  renderBudgetBars(mt)
-  renderRecentTxns(mt.slice(0,5))
-  renderDebts()
-  renderSubscriptions()
-  renderInsights(mt)
+  renderBudgetBars(mt);renderRecentTxns(mt.slice(0,5))
+  renderDebts();renderSubscriptions();renderInsights(mt)
 }
 
 function renderBudgetBars(mt){
   const cats=Object.keys(userBudgets)
-  const el=document.getElementById('budget-bars')
-  const warnEl=document.getElementById('budget-warn')
+  const el=document.getElementById('budget-bars'),warnEl=document.getElementById('budget-warn')
   if(cats.length===0){el.innerHTML='<div class="empty"><div class="empty-icon">📊</div>Set budget kat Settings dulu!</div>';warnEl.style.display='none';return}
   let warns=[],html=''
   cats.forEach(cat=>{
@@ -650,8 +730,7 @@ function renderRecentTxns(txns){
 }
 
 function renderDebts(){
-  const el=document.getElementById('debt-list')
-  const sumEl=document.getElementById('debt-summary')
+  const el=document.getElementById('debt-list'),sumEl=document.getElementById('debt-summary')
   const unsettled=allDebts.filter(d=>!d.settled)
   if(unsettled.length===0){el.innerHTML='<div class="empty" style="padding:12px 0"><div class="empty-icon">🤝</div>Takde hutang — clean! 😎</div>';sumEl.style.display='none';return}
   const total=unsettled.reduce((a,b)=>a+b.amount,0)
@@ -670,8 +749,7 @@ function renderDebts(){
 }
 
 function renderSubscriptions(){
-  const el=document.getElementById('sub-list')
-  const sumEl=document.getElementById('sub-summary')
+  const el=document.getElementById('sub-list'),sumEl=document.getElementById('sub-summary')
   const unique={}
   allTransactions.filter(t=>t.is_recurring&&t.type==='out').forEach(t=>{if(!unique[t.name])unique[t.name]=t})
   const subs=Object.values(unique)
@@ -700,7 +778,7 @@ function renderInsights(mt){
   document.getElementById('ins-total').textContent=mt.length
 }
 
-// ============ HISTORY ============
+// ===== HISTORY =====
 function renderHistory(){
   const el=document.getElementById('history-list')
   if(allTransactions.length===0){el.innerHTML='<div class="empty"><div class="empty-icon">🕐</div>Belum ada history lagi</div>';return}
@@ -717,10 +795,10 @@ function renderHistory(){
     const inc=txns.filter(t=>t.type==='in').reduce((a,b)=>a+b.amount,0)
     const exp=txns.filter(t=>t.type==='out').reduce((a,b)=>a+b.amount,0)
     const bal=inc-exp
-    const weekSpend=[0,0,0,0,0]
-    txns.filter(t=>t.type==='out').forEach(t=>{const d=new Date(t.date);const w=Math.min(4,Math.floor((d.getDate()-1)/7));weekSpend[w]+=t.amount})
-    const maxW=Math.max(...weekSpend,1)
-    const bars=weekSpend.map((v,i)=>`<div class="mini-bar" style="flex:1;height:${Math.round((v/maxW)*100)}%;background:${v===Math.max(...weekSpend)?'var(--red)':'var(--green)'}"></div>`).join('')
+    const ws=[0,0,0,0,0]
+    txns.filter(t=>t.type==='out').forEach(t=>{const d=new Date(t.date);const w=Math.min(4,Math.floor((d.getDate()-1)/7));ws[w]+=t.amount})
+    const maxW=Math.max(...ws,1)
+    const bars=ws.map((v,i)=>`<div class="mini-bar" style="flex:1;height:${Math.round((v/maxW)*100)}%;background:${v===Math.max(...ws)?'var(--red)':'var(--green)'}"></div>`).join('')
     html+=`
     <div class="hist-month-lbl">${month}</div>
     <div class="hist-card">
@@ -732,7 +810,7 @@ function renderHistory(){
       </div>
       <div class="mini-bars">${bars}</div>
       <div style="display:flex;gap:3px;margin-top:3px;margin-bottom:10px">
-        ${weekSpend.map((_,i)=>`<span style="flex:1;font-size:9px;color:var(--muted);text-align:center">W${i+1}</span>`).join('')}
+        ${ws.map((_,i)=>`<span style="flex:1;font-size:9px;color:var(--muted);text-align:center">W${i+1}</span>`).join('')}
       </div>
       ${txns.map(t=>`
         <div class="txn">
@@ -751,7 +829,7 @@ function renderHistory(){
   el.innerHTML=html
 }
 
-// ============ TRANSACTIONS ============
+// ===== TRANSACTIONS =====
 function showAddModal(){
   document.getElementById('add-date').value=new Date().toISOString().split('T')[0]
   document.getElementById('add-name').value=''
@@ -760,15 +838,10 @@ function showAddModal(){
   document.getElementById('add-recurring').checked=false
   document.getElementById('add-split').checked=false
   document.getElementById('add-msg').innerHTML=''
-  selectedCat=''
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('sel'))
+  selectedCat='';document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('sel'))
   document.getElementById('add-modal').classList.add('show')
 }
-
-function selCat(el,cat){
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('sel'))
-  el.classList.add('sel');selectedCat=cat
-}
+function selCat(el,cat){document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');selectedCat=cat}
 
 async function saveTransaction(){
   const name=document.getElementById('add-name').value.trim()
@@ -798,12 +871,11 @@ async function saveTransaction(){
 async function deleteTxn(id){
   if(!confirm('Delete transaksi ni?')) return
   await sb.from('transactions').delete().eq('id',id)
-  await loadTransactions()
-  renderHome()
+  await loadTransactions();renderHome()
   if(document.getElementById('tab-history').style.display!=='none') renderHistory()
 }
 
-// ============ DEBT ============
+// ===== DEBT =====
 function showDebtModal(){
   document.getElementById('debt-name').value=''
   document.getElementById('debt-amount').value=''
@@ -812,7 +884,6 @@ function showDebtModal(){
   document.getElementById('debt-msg').innerHTML=''
   document.getElementById('debt-modal').classList.add('show')
 }
-
 function saveDebt(){
   const name=document.getElementById('debt-name').value.trim()
   const amount=document.getElementById('debt-amount').value
@@ -821,18 +892,11 @@ function saveDebt(){
   const msgEl=document.getElementById('debt-msg')
   if(!name||!amount){showMsg(msgEl,'Isi nama dan amaun!','err');return}
   allDebts.push({id:Date.now().toString(),name,amount:parseFloat(amount),note,date,settled:false})
-  saveDebtsLocal()
-  hideModal('debt-modal')
-  renderDebts()
+  saveDebtsLocal();hideModal('debt-modal');renderDebts()
 }
+function settleDebt(id){const d=allDebts.find(d=>d.id===id);if(d)d.settled=true;saveDebtsLocal();renderDebts()}
 
-function settleDebt(id){
-  const d=allDebts.find(d=>d.id===id)
-  if(d) d.settled=true
-  saveDebtsLocal();renderDebts()
-}
-
-// ============ SETTINGS ============
+// ===== SETTINGS =====
 async function saveSettings(){
   const msgEl=document.getElementById('settings-msg')
   const name=document.getElementById('set-name').value
@@ -848,11 +912,10 @@ async function saveSettings(){
   if(newBudgets.length>0) await sb.from('budgets').insert(newBudgets)
   await loadBudgets()
   document.getElementById('greeting').textContent='Helo, '+(name||currentUser.email.split('@')[0])+' ✨'
-  renderHome()
-  showMsg(msgEl,'Settings saved! ✓','ok')
+  renderHome();showMsg(msgEl,'Settings saved! ✓','ok')
 }
 
-// ============ NAV ============
+// ===== NAV =====
 function switchTab(tab){
   document.querySelectorAll('[id^="tab-"]').forEach(el=>el.style.display='none')
   document.querySelectorAll('.navitem').forEach(el=>el.classList.remove('active'))
@@ -860,28 +923,57 @@ function switchTab(tab){
   document.getElementById('nav-'+tab).classList.add('active')
   if(tab==='history') renderHistory()
 }
-
 function changeMonth(dir){
   currentMonth+=dir
   if(currentMonth>11){currentMonth=0;currentYear++}
   if(currentMonth<0){currentMonth=11;currentYear--}
   updateMonthLabel();renderHome()
 }
-function updateMonthLabel(){ document.getElementById('month-label').textContent=MONTHS[currentMonth]+' '+currentYear }
+function updateMonthLabel(){document.getElementById('month-label').textContent=MONTHS[currentMonth]+' '+currentYear}
 
-// ============ UTILS ============
+// ===== UTILS =====
 function showMsg(el,text,type){
   el.innerHTML=`<div class="msg ${type}">${text}</div>`
-  if(type==='ok') setTimeout(()=>el.innerHTML='',3000)
+  if(type==='ok') setTimeout(()=>el.innerHTML='',4000)
 }
-function hideModal(id){ document.getElementById(id).classList.remove('show') }
+function hideModal(id){document.getElementById(id).classList.remove('show')}
 
-// ============ INIT ============
-window.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('screen-login').classList.contains('active')) handleAuth()})
+// ===== INIT — handle password reset redirect =====
 ;(async()=>{
+  // Check if redirected from password reset email
+  const hash=window.location.hash
+  const params=new URLSearchParams(hash.replace('#','?'))
+  const accessToken=params.get('access_token')
+  const type=params.get('type')
+
+  if(accessToken && type==='recovery'){
+    // Set the session from the token in URL
+    const {data,error}=await sb.auth.setSession({
+      access_token: accessToken,
+      refresh_token: params.get('refresh_token')||''
+    })
+    if(!error && data.session){
+      // Clear hash from URL
+      history.replaceState(null,'',window.location.pathname)
+      // Show reset password screen
+      showScreen('screen-reset')
+      return
+    }
+  }
+
+  // Normal session check
   const {data:{session}}=await sb.auth.getSession()
   if(session){currentUser=session.user;await loadApp()}
 })()
+
+window.addEventListener('keydown',e=>{
+  if(e.key==='Enter'){
+    const active=document.querySelector('.screen.active')
+    if(active&&active.id==='screen-login') handleAuth()
+    if(active&&active.id==='screen-forgot') sendResetEmail()
+    if(active&&active.id==='screen-reset') updatePassword()
+  }
+})
 </script>
 </body>
 </html>
