@@ -25,21 +25,13 @@
   --nav-bg:#1E1610;--topbar:#1E1610;
 }
 body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;margin:0 auto;min-height:100vh;color:var(--ink);transition:background 0.3s,color 0.3s}
-.screen{display:none;flex-direction:column;min-height:100vh}
-.screen.active{display:flex}
-
-/* LOGIN */
+.screen{display:none;flex-direction:column;min-height:100vh}.screen.active{display:flex}
 .login-wrap{min-height:100vh;background:var(--page);display:flex;align-items:center;justify-content:center;padding:20px}
 .login-card{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:32px 28px;width:100%;max-width:360px}
-.brand-name{font-size:26px;font-weight:800;color:var(--accent)}
-.brand-name span{color:var(--accent2)}
-
-/* TOPBAR */
+.brand-name{font-size:26px;font-weight:800;color:var(--accent)}.brand-name span{color:var(--accent2)}
 .topbar{background:var(--topbar);border-bottom:1.5px solid var(--border);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}
-.brand-row{display:flex;align-items:center;gap:8px}
-.brand-text{display:flex;flex-direction:column}
-.topbar-brand{font-size:18px;font-weight:800;color:var(--accent);letter-spacing:-0.3px;line-height:1.1}
-.topbar-brand span{color:var(--accent2)}
+.brand-row{display:flex;align-items:center;gap:8px}.brand-text{display:flex;flex-direction:column}
+.topbar-brand{font-size:18px;font-weight:800;color:var(--accent);letter-spacing:-0.3px;line-height:1.1}.topbar-brand span{color:var(--accent2)}
 .topbar-greeting{font-size:10px;color:var(--muted);font-weight:500}
 .topbar-right{display:flex;align-items:center;gap:6px}
 .month-nav{display:flex;align-items:center;gap:5px}
@@ -53,8 +45,7 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 .balance-rm{font-size:18px;font-weight:600;color:var(--muted);margin-right:2px}
 .chips-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 .chip{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:9px 12px}
-.chip .lbl{font-size:10px;font-weight:600;color:var(--muted);margin-bottom:2px}
-.chip .val{font-size:15px;font-weight:700}
+.chip .lbl{font-size:10px;font-weight:600;color:var(--muted);margin-bottom:2px}.chip .val{font-size:15px;font-weight:700}
 .goal-row{display:flex;align-items:center;gap:8px;margin-top:10px}
 .goal-lbl{font-size:10px;font-weight:600;color:var(--muted);white-space:nowrap}
 .goal-track{flex:1;height:6px;background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border)}
@@ -64,69 +55,62 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 .brow{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
 .bcat{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--ink)}
 .bdot{width:8px;height:8px;border-radius:50%}
-.bamt{font-size:11px;font-weight:500;color:var(--muted)}
-.bamt b{color:var(--ink);font-weight:700}
+.bamt{font-size:11px;font-weight:500;color:var(--muted)}.bamt b{color:var(--ink);font-weight:700}
 .btrack{height:6px;background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border)}
 .bfill{height:100%;border-radius:10px;transition:width 0.5s}
 .warn-pill{background:var(--red-light);border:1.5px solid var(--red);border-radius:12px;padding:7px 12px;margin-bottom:10px;font-size:11px;font-weight:600;color:var(--red);display:flex;align-items:center;gap:6px}
-.txn{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1.5px solid var(--border)}
-.txn:last-child{border-bottom:none}
+.txn{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1.5px solid var(--border)}.txn:last-child{border-bottom:none}
 .txn-ico{width:36px;height:36px;border-radius:12px;background:var(--surface);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 .txn-body{flex:1;min-width:0}
 .txn-name{font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .txn-date{font-size:10px;color:var(--muted);margin-top:1px;font-weight:500}
 .txn-amt{font-size:12px;font-weight:700;white-space:nowrap}
-.txn-del{background:none;border:none;cursor:pointer;font-size:13px;color:var(--muted);padding:4px;opacity:0.5}
-.txn-del:hover{opacity:1;color:var(--red)}
+.txn-del{background:none;border:none;cursor:pointer;font-size:13px;color:var(--muted);padding:4px;opacity:0.5}.txn-del:hover{opacity:1;color:var(--red)}
 .badge{font-size:9px;padding:2px 6px;border-radius:6px;margin-left:4px;font-weight:700;vertical-align:middle}
-.badge.auto{background:var(--green-light);color:var(--green)}
-.badge.split{background:var(--blue-light);color:var(--blue)}
-.badge.ai{background:var(--amber-light);color:var(--amber)}
+.badge.auto{background:var(--green-light);color:var(--green)}.badge.split{background:var(--blue-light);color:var(--blue)}.badge.ai{background:var(--amber-light);color:var(--amber)}
 .igrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .icard{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:10px 12px}
 .ilabel{font-size:10px;font-weight:600;color:var(--muted);margin-bottom:3px}
-.ival{font-size:14px;font-weight:700;color:var(--ink)}
-.isub{font-size:10px;color:var(--muted);font-weight:500;margin-top:1px}
-.debt-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1.5px solid var(--border)}
-.debt-item:last-child{border-bottom:none}
+.ival{font-size:14px;font-weight:700;color:var(--ink)}.isub{font-size:10px;color:var(--muted);font-weight:500;margin-top:1px}
+.debt-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1.5px solid var(--border)}.debt-item:last-child{border-bottom:none}
 .debt-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent-light);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--accent);flex-shrink:0}
-.debt-body{flex:1}
-.debt-name{font-size:12px;font-weight:700;color:var(--ink)}
-.debt-note{font-size:10px;color:var(--muted);margin-top:1px}
+.debt-body{flex:1}.debt-name{font-size:12px;font-weight:700;color:var(--ink)}.debt-note{font-size:10px;color:var(--muted);margin-top:1px}
 .debt-amt{font-size:13px;font-weight:700;color:var(--red)}
 .settle-btn{background:var(--green-light);border:1.5px solid var(--green);border-radius:8px;padding:4px 8px;font-size:10px;font-weight:700;color:var(--green);cursor:pointer;font-family:'Nunito',sans-serif}
-.sub-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1.5px solid var(--border)}
-.sub-item:last-child{border-bottom:none}
+.sub-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1.5px solid var(--border)}.sub-item:last-child{border-bottom:none}
 .sub-ico{width:34px;height:34px;border-radius:10px;background:var(--surface);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.sub-body{flex:1}
-.sub-name{font-size:12px;font-weight:700;color:var(--ink)}
-.sub-date{font-size:10px;color:var(--muted);margin-top:1px}
-.sub-amt{font-size:12px;font-weight:700;color:var(--red)}
+.sub-body{flex:1}.sub-name{font-size:12px;font-weight:700;color:var(--ink)}.sub-date{font-size:10px;color:var(--muted);margin-top:1px}.sub-amt{font-size:12px;font-weight:700;color:var(--red)}
 .hist-month-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin:8px 0 6px}
 .hist-card{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:12px 14px;margin-bottom:8px}
 .hist-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .hist-lbl{font-size:14px;font-weight:700;color:var(--ink)}
-.mini-bars{display:flex;gap:3px;height:36px;align-items:flex-end;margin-top:4px}
-.mini-bar{flex:1;border-radius:3px 3px 0 0;min-height:3px}
-.tabs{display:flex;gap:4px;background:var(--surface);border-radius:14px;padding:4px;border:1.5px solid var(--border);margin-bottom:12px}
-.tab{flex:1;text-align:center;padding:7px 2px;font-size:10px;font-weight:700;border-radius:10px;cursor:pointer;color:var(--muted);transition:all 0.15s}
-.tab.active{background:var(--card);color:var(--accent);border:1.5px solid var(--border)}
-.ai-coming{text-align:center;padding:32px 20px}
-.ai-coming-icon{font-size:40px;margin-bottom:10px}
-.ai-coming-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
-.ai-coming-sub{font-size:12px;color:var(--muted);line-height:1.6}
-.ai-feature-list{margin-top:16px;display:flex;flex-direction:column;gap:8px}
-.ai-feature-item{display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:10px 12px}
-.ai-feature-ico{font-size:18px;flex-shrink:0}
-.ai-feature-text{font-size:11px;font-weight:600;color:var(--muted)}
-.ai-feature-text b{color:var(--ink);display:block;font-size:12px;margin-bottom:1px}
+.mini-bars{display:flex;gap:3px;height:36px;align-items:flex-end;margin-top:4px}.mini-bar{flex:1;border-radius:3px 3px 0 0;min-height:3px}
+/* AI TAB */
+.ai-tabs{display:flex;gap:4px;background:var(--surface);border-radius:14px;padding:4px;border:1.5px solid var(--border);margin-bottom:14px}
+.ai-tab{flex:1;text-align:center;padding:7px 2px;font-size:10px;font-weight:700;border-radius:10px;cursor:pointer;color:var(--muted);transition:all 0.15s}
+.ai-tab.active{background:var(--card);color:var(--accent);border:1.5px solid var(--border)}
+.ai-header{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.ai-sub{font-size:11px;font-weight:500;color:var(--muted);margin-bottom:12px}
+.ai-result{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:13px 14px;font-size:12px;font-weight:500;color:var(--ink);line-height:1.75;white-space:pre-wrap;margin-top:10px;font-family:'Nunito Sans',sans-serif}
+.ai-result.loading{color:var(--muted);font-style:italic;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.upload-zone{border:2px dashed var(--border2);border-radius:16px;padding:22px;text-align:center;cursor:pointer;background:var(--surface);transition:border-color 0.2s}
+.upload-zone:hover{border-color:var(--accent)}
+.upload-icon{font-size:28px;margin-bottom:6px}
+.upload-label{font-size:11px;font-weight:600;color:var(--muted)}.upload-label span{color:var(--accent)}
+.preview-img{width:100%;border-radius:12px;margin-top:8px;max-height:160px;object-fit:cover}
+.roast-score{text-align:center;padding:16px 0 8px}
+.roast-num{font-size:52px;font-weight:800;letter-spacing:-2px}
+.roast-grade{font-size:12px;font-weight:600;color:var(--muted);margin-top:2px}
+.score-ring{width:80px;height:80px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;border:4px solid}
+/* BOTTOMNAV */
 .bottomnav{background:var(--nav-bg);border-top:1.5px solid var(--border);display:flex;justify-content:space-around;align-items:center;padding:10px 0 18px;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:20}
 .navitem{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1}
-.navico{font-size:18px}
-.navlbl{font-size:9px;font-weight:700;color:var(--muted);letter-spacing:0.03em}
+.navico{font-size:18px}.navlbl{font-size:9px;font-weight:700;color:var(--muted);letter-spacing:0.03em}
 .navitem.active .navlbl{color:var(--accent)}
 .fab{width:46px;height:46px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:-14px;cursor:pointer;border:3px solid var(--page);box-shadow:0 4px 14px rgba(232,128,74,0.4)}
 .fab span{font-size:22px;color:#fff;line-height:1}
+/* FORMS */
 .form-field{margin-bottom:10px}
 .form-label{font-size:10px;font-weight:700;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em;display:block}
 .form-input{width:100%;background:var(--surface);border:1.5px solid var(--border2);border-radius:12px;padding:10px 12px;font-size:13px;font-weight:500;color:var(--ink);font-family:'Nunito',sans-serif;outline:none}
@@ -138,8 +122,7 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 .action-btn:disabled{opacity:0.5;cursor:not-allowed}
 .action-btn.sec{background:var(--surface);color:var(--ink);border:1.5px solid var(--border2)}
 .action-btn.ghost{background:none;color:var(--muted);border:none;font-size:12px;padding:8px;margin-top:2px}
-.two-col{display:flex;gap:8px}
-.two-col>div{flex:1}
+.two-col{display:flex;gap:8px}.two-col>div{flex:1}
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:100;align-items:flex-end;justify-content:center}
 .overlay.show{display:flex}
 .modal{background:var(--card);border-radius:24px 24px 0 0;padding:20px 16px 32px;width:100%;max-width:430px;border-top:2px solid var(--border);max-height:90vh;overflow-y:auto}
@@ -148,20 +131,17 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 .msg{border-radius:10px;padding:8px 12px;font-size:12px;font-weight:600;margin-bottom:12px}
 .msg.err{background:var(--red-light);border:1.5px solid var(--red);color:var(--red)}
 .msg.ok{background:var(--green-light);border:1.5px solid var(--green);color:var(--green)}
-.empty{text-align:center;padding:24px 20px;color:var(--muted);font-size:13px}
-.empty-icon{font-size:30px;margin-bottom:8px}
+.empty{text-align:center;padding:24px 20px;color:var(--muted);font-size:13px}.empty-icon{font-size:30px;margin-bottom:8px}
 .val-g{color:var(--green)}.val-r{color:var(--red)}
 .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .add-small{background:var(--accent-light);border:1.5px solid var(--accent);border-radius:8px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--accent);cursor:pointer;font-family:'Nunito',sans-serif}
 .divider{border-top:1.5px solid var(--border);margin-top:8px;padding-top:8px;display:flex;justify-content:space-between}
-/* RESET PASSWORD SCREEN */
 .reset-back{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;margin-bottom:16px;background:none;border:none;font-family:'Nunito',sans-serif;padding:0}
-.reset-back:hover{color:var(--accent)}
-.reset-step{text-align:center;margin-bottom:20px}
-.reset-step-icon{font-size:36px;margin-bottom:8px}
-.reset-step-title{font-size:16px;font-weight:800;color:var(--ink)}
-.reset-step-sub{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5}
+.reset-step{text-align:center;margin-bottom:20px}.reset-step-icon{font-size:36px;margin-bottom:8px}
+.reset-step-title{font-size:16px;font-weight:800;color:var(--ink)}.reset-step-sub{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5}
 .pw-strength{height:4px;border-radius:2px;margin-top:6px;transition:all 0.3s}
+.ai-cat-btn{width:100%;background:var(--surface);border:1.5px solid var(--border2);border-radius:12px;padding:9px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Nunito',sans-serif;margin-bottom:6px}
+.ai-cat-btn:disabled{opacity:0.5;cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -185,7 +165,7 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
   </defs>
 </svg>
 
-<!-- ==================== LOGIN ==================== -->
+<!-- LOGIN -->
 <div id="screen-login" class="screen active">
   <div class="login-wrap">
     <div class="login-card">
@@ -198,7 +178,6 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
       <div class="form-field"><label class="form-label">Email</label><input class="form-input" id="login-email" type="email" placeholder="korang@email.com"></div>
       <div class="form-field"><label class="form-label">Password</label><input class="form-input" id="login-password" type="password" placeholder="••••••••"></div>
       <button class="action-btn" id="login-btn" onclick="handleAuth()">Login ✓</button>
-      <!-- FORGOT PASSWORD LINK -->
       <div style="text-align:center;margin-top:10px">
         <button class="action-btn ghost" onclick="showForgotPassword()">Lupa password? 🔑</button>
       </div>
@@ -210,34 +189,31 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
   </div>
 </div>
 
-<!-- ==================== FORGOT PASSWORD ==================== -->
+<!-- FORGOT PASSWORD -->
 <div id="screen-forgot" class="screen">
   <div class="login-wrap">
     <div class="login-card">
-      <button class="reset-back" onclick="showLogin()">‹ Balik login</button>
+      <button class="reset-back" onclick="showScreen('screen-login')">‹ Balik login</button>
       <div class="reset-step">
         <div class="reset-step-icon">🔑</div>
         <div class="reset-step-title">Lupa Password?</div>
-        <div class="reset-step-sub">Takpe! Masukkan email korang dan kita hantar link reset password.</div>
+        <div class="reset-step-sub">Masukkan email korang dan kita hantar link reset password.</div>
       </div>
       <div id="forgot-msg"></div>
-      <div class="form-field">
-        <label class="form-label">Email</label>
-        <input class="form-input" id="forgot-email" type="email" placeholder="korang@email.com">
-      </div>
+      <div class="form-field"><label class="form-label">Email</label><input class="form-input" id="forgot-email" type="email" placeholder="korang@email.com"></div>
       <button class="action-btn" id="forgot-btn" onclick="sendResetEmail()">Hantar Reset Link ✉️</button>
     </div>
   </div>
 </div>
 
-<!-- ==================== RESET PASSWORD ==================== -->
+<!-- RESET PASSWORD -->
 <div id="screen-reset" class="screen">
   <div class="login-wrap">
     <div class="login-card">
       <div class="reset-step">
         <div class="reset-step-icon">🔐</div>
         <div class="reset-step-title">Set Password Baru</div>
-        <div class="reset-step-sub">Masukkan password baru korang. Pastikan sekurang-kurangnya 8 aksara.</div>
+        <div class="reset-step-sub">Masukkan password baru korang. Min 8 aksara.</div>
       </div>
       <div id="reset-msg"></div>
       <div class="form-field">
@@ -246,27 +222,21 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
         <div id="pw-strength-bar" class="pw-strength" style="background:var(--border);width:100%"></div>
         <div id="pw-strength-label" style="font-size:10px;color:var(--muted);margin-top:4px"></div>
       </div>
-      <div class="form-field">
-        <label class="form-label">Confirm Password</label>
-        <input class="form-input" id="reset-confirm" type="password" placeholder="Ulang password baru">
-      </div>
+      <div class="form-field"><label class="form-label">Confirm Password</label><input class="form-input" id="reset-confirm" type="password" placeholder="Ulang password baru"></div>
       <button class="action-btn" id="reset-btn" onclick="updatePassword()">Tukar Password ✓</button>
     </div>
   </div>
 </div>
 
-<!-- ==================== MAIN APP ==================== -->
+<!-- MAIN APP -->
 <div id="screen-app" class="screen">
 
-  <!-- HOME TAB -->
+  <!-- HOME -->
   <div id="tab-home">
     <div class="topbar">
       <div class="brand-row">
         <svg width="38" height="38"><use href="#logo"/></svg>
-        <div class="brand-text">
-          <div class="topbar-brand">duit<span>ku</span></div>
-          <div class="topbar-greeting" id="greeting">Helo ✨</div>
-        </div>
+        <div class="brand-text"><div class="topbar-brand">duit<span>ku</span></div><div class="topbar-greeting" id="greeting">Helo ✨</div></div>
       </div>
       <div class="topbar-right">
         <div class="month-nav">
@@ -281,11 +251,7 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
       <div class="card">
         <div class="card-title">Baki bulan ini</div>
         <div class="balance-big"><span class="balance-rm">RM</span><span id="home-balance">0.00</span></div>
-        <div class="goal-row">
-          <span class="goal-lbl">Saving goal</span>
-          <div class="goal-track"><div class="goal-fill" id="goal-fill" style="width:0%"></div></div>
-          <span class="goal-pct" id="goal-pct">0%</span>
-        </div>
+        <div class="goal-row"><span class="goal-lbl">Saving goal</span><div class="goal-track"><div class="goal-fill" id="goal-fill" style="width:0%"></div></div><span class="goal-pct" id="goal-pct">0%</span></div>
         <div class="chips-row">
           <div class="chip"><div class="lbl">Masuk</div><div class="val val-g" id="home-income">RM 0.00</div></div>
           <div class="chip"><div class="lbl">Keluar</div><div class="val val-r" id="home-expense">RM 0.00</div></div>
@@ -301,25 +267,14 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
         <div id="recent-txns"><div class="empty"><div class="empty-icon">🌸</div>Belum ada transaksi lagi<br><small>Tap + untuk tambah!</small></div></div>
       </div>
       <div class="card">
-        <div class="section-header">
-          <div class="card-title" style="margin-bottom:0">Hutang tracker 💸</div>
-          <button class="add-small" onclick="showDebtModal()">+ Tambah</button>
-        </div>
+        <div class="section-header"><div class="card-title" style="margin-bottom:0">Hutang tracker 💸</div><button class="add-small" onclick="showDebtModal()">+ Tambah</button></div>
         <div id="debt-list"><div class="empty" style="padding:12px 0"><div class="empty-icon">🤝</div>Takde hutang — clean! 😎</div></div>
-        <div id="debt-summary" style="display:none" class="divider">
-          <span style="font-size:11px;font-weight:600;color:var(--muted)">Total belum settle</span>
-          <span style="font-size:13px;font-weight:700;color:var(--red)" id="debt-total">RM 0</span>
-        </div>
+        <div id="debt-summary" style="display:none" class="divider"><span style="font-size:11px;font-weight:600;color:var(--muted)">Total belum settle</span><span style="font-size:13px;font-weight:700;color:var(--red)" id="debt-total">RM 0</span></div>
       </div>
       <div class="card">
-        <div class="section-header">
-          <div class="card-title" style="margin-bottom:0">Subscriptions 📱</div>
-        </div>
+        <div class="section-header"><div class="card-title" style="margin-bottom:0">Subscriptions 📱</div></div>
         <div id="sub-list"><div class="empty" style="padding:12px 0"><div class="empty-icon">✨</div>Takde recurring bills lagi</div></div>
-        <div id="sub-summary" style="display:none" class="divider">
-          <span style="font-size:11px;font-weight:600;color:var(--muted)">Total / bulan</span>
-          <span style="font-size:13px;font-weight:700;color:var(--red)" id="sub-total">RM 0</span>
-        </div>
+        <div id="sub-summary" style="display:none" class="divider"><span style="font-size:11px;font-weight:600;color:var(--muted)">Total / bulan</span><span style="font-size:13px;font-weight:700;color:var(--red)" id="sub-total">RM 0</span></div>
       </div>
       <div class="card">
         <div class="card-title">Insights bulan ini</div>
@@ -333,54 +288,87 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
     </div>
   </div>
 
-  <!-- HISTORY TAB -->
+  <!-- HISTORY -->
   <div id="tab-history" style="display:none">
     <div class="topbar">
-      <div class="brand-row">
-        <svg width="38" height="38"><use href="#logo"/></svg>
-        <div class="brand-text"><div class="topbar-brand">duit<span>ku</span></div><div class="topbar-greeting">Semua transaksi</div></div>
-      </div>
+      <div class="brand-row"><svg width="38" height="38"><use href="#logo"/></svg><div class="brand-text"><div class="topbar-brand">duit<span>ku</span></div><div class="topbar-greeting">Semua transaksi</div></div></div>
       <button class="theme-btn" onclick="toggleTheme()">🌙</button>
     </div>
-    <div class="content">
-      <div id="history-list"><div class="empty"><div class="empty-icon">🕐</div>Belum ada history lagi</div></div>
-    </div>
+    <div class="content"><div id="history-list"><div class="empty"><div class="empty-icon">🕐</div>Belum ada history lagi</div></div></div>
   </div>
 
   <!-- AI TAB -->
   <div id="tab-ai" style="display:none">
     <div class="topbar">
-      <div class="brand-row">
-        <svg width="38" height="38"><use href="#logo"/></svg>
-        <div class="brand-text"><div class="topbar-brand">duit<span>ku</span></div><div class="topbar-greeting">AI Features ✨</div></div>
-      </div>
+      <div class="brand-row"><svg width="38" height="38"><use href="#logo"/></svg><div class="brand-text"><div class="topbar-brand">duit<span>ku</span></div><div class="topbar-greeting">AI Features 🧠</div></div></div>
       <button class="theme-btn" onclick="toggleTheme()">🌙</button>
     </div>
     <div class="content">
-      <div class="card">
-        <div class="ai-coming">
-          <div class="ai-coming-icon">🧠</div>
-          <div class="ai-coming-title">AI Features — Coming Soon!</div>
-          <div class="ai-coming-sub">Tengah build AI features untuk korang.<br>Stay tuned untuk V2! 🚀</div>
+      <div class="ai-tabs">
+        <div class="ai-tab active" onclick="switchAITab(0)">📄 Resit</div>
+        <div class="ai-tab" onclick="switchAITab(1)">📈 Forecast</div>
+        <div class="ai-tab" onclick="switchAITab(2)">📝 Summary</div>
+        <div class="ai-tab" onclick="switchAITab(3)">🔥 Roast</div>
+      </div>
+
+      <!-- RECEIPT -->
+      <div id="ai-tab-0">
+        <div class="card">
+          <div class="ai-header">Receipt Scanner 📄</div>
+          <div class="ai-sub">Snap resit — AI auto-extract & categorize</div>
+          <div class="upload-zone" onclick="document.getElementById('receipt-input').click()">
+            <div id="upload-preview-wrap"><div class="upload-icon">🧾</div><div class="upload-label">Tap untuk upload resit<br><span>pilih gambar dari galeri</span></div></div>
+          </div>
+          <input type="file" id="receipt-input" accept="image/*" style="display:none" onchange="handleReceipt(event)">
+          <div id="receipt-result" style="display:none">
+            <div class="ai-result" id="receipt-text"></div>
+            <button class="action-btn" style="margin-top:8px" onclick="saveFromReceipt()">Simpan Transaksi ✓</button>
+          </div>
         </div>
-        <div class="ai-feature-list">
-          <div class="ai-feature-item"><div class="ai-feature-ico">📄</div><div class="ai-feature-text"><b>Receipt Scanner</b>Snap resit — AI auto-extract & categorize</div></div>
-          <div class="ai-feature-item"><div class="ai-feature-ico">📈</div><div class="ai-feature-text"><b>Spending Forecast</b>Predict perbelanjaan hujung bulan</div></div>
-          <div class="ai-feature-item"><div class="ai-feature-ico">📝</div><div class="ai-feature-text"><b>Monthly Summary</b>AI tulis laporan bulan dalam BM casual</div></div>
-          <div class="ai-feature-item"><div class="ai-feature-ico">🔥</div><div class="ai-feature-text"><b>Financial Roast</b>AI bagi honest & brutal spending feedback</div></div>
-          <div class="ai-feature-item"><div class="ai-feature-ico">🏷️</div><div class="ai-feature-text"><b>Auto-Categorize</b>Taip nama je — AI detect kategori sendiri</div></div>
+      </div>
+
+      <!-- FORECAST -->
+      <div id="ai-tab-1" style="display:none">
+        <div class="card">
+          <div class="ai-header">Spending Forecast 📈</div>
+          <div class="ai-sub">Predict perbelanjaan korang hujung bulan</div>
+          <button class="action-btn" onclick="runForecast()" id="forecast-btn">Generate Forecast ↗</button>
+          <div id="forecast-result" style="display:none"><div class="ai-result" id="forecast-text"></div></div>
+        </div>
+      </div>
+
+      <!-- SUMMARY -->
+      <div id="ai-tab-2" style="display:none">
+        <div class="card">
+          <div class="ai-header">Monthly Summary 📝</div>
+          <div class="ai-sub">AI tulis laporan bulan dalam BM casual</div>
+          <button class="action-btn" onclick="runSummary()" id="summary-btn" id="summary-btn">Generate Summary ↗</button>
+          <div id="summary-result" style="display:none"><div class="ai-result" id="summary-text"></div></div>
+        </div>
+      </div>
+
+      <!-- ROAST -->
+      <div id="ai-tab-3" style="display:none">
+        <div class="card">
+          <div class="ai-header">Financial Roast 🔥</div>
+          <div class="ai-sub">AI bagi honest & brutal spending feedback</div>
+          <button class="action-btn" onclick="runRoast()" id="roast-btn">Roast My Spending 🔥</button>
+          <div id="roast-result" style="display:none">
+            <div class="roast-score">
+              <div class="score-ring" id="score-ring"><span id="roast-score-num">—</span></div>
+              <div class="roast-grade" id="roast-grade">Financial Health Score</div>
+            </div>
+            <div class="ai-result" id="roast-text"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SETTINGS TAB -->
+  <!-- SETTINGS -->
   <div id="tab-settings" style="display:none">
     <div class="topbar">
-      <div class="brand-row">
-        <svg width="38" height="38"><use href="#logo"/></svg>
-        <div class="brand-text"><div class="topbar-brand">duit<span>ku</span></div><div class="topbar-greeting">Tetapan</div></div>
-      </div>
+      <div class="brand-row"><svg width="38" height="38"><use href="#logo"/></svg><div class="brand-text"><div class="topbar-brand">duit<span>ku</span></div><div class="topbar-greeting">Tetapan</div></div></div>
       <div style="display:flex;gap:6px;align-items:center">
         <button class="theme-btn" onclick="toggleTheme()">🌙</button>
         <button onclick="logout()" style="background:var(--surface);border:1.5px solid var(--border2);border-radius:10px;padding:6px 12px;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Nunito',sans-serif">Logout</button>
@@ -420,7 +408,6 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
     </div>
   </div>
 
-  <!-- BOTTOM NAV -->
   <div class="bottomnav">
     <div class="navitem active" id="nav-home" onclick="switchTab('home')"><div class="navico">🏠</div><div class="navlbl">Home</div></div>
     <div class="navitem" id="nav-history" onclick="switchTab('history')"><div class="navico">🕐</div><div class="navlbl">History</div></div>
@@ -446,20 +433,15 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
         <button class="cat-btn" onclick="selCat(this,'Bil')">📱 Bil</button>
         <button class="cat-btn" onclick="selCat(this,'Lain')">📦 Lain</button>
       </div>
+      <button class="ai-cat-btn" id="ai-cat-btn" onclick="autoCategory()">🧠 AI Auto-Detect Kategori ↗</button>
     </div>
     <div class="two-col" style="margin-bottom:10px">
-      <div><label class="form-label">Jenis</label>
-        <select class="form-input" id="add-type"><option value="out">Keluar 💸</option><option value="in">Masuk 💰</option></select>
-      </div>
+      <div><label class="form-label">Jenis</label><select class="form-input" id="add-type"><option value="out">Keluar 💸</option><option value="in">Masuk 💰</option></select></div>
       <div><label class="form-label">Tarikh</label><input class="form-input" id="add-date" type="date"></div>
     </div>
     <div style="display:flex;gap:16px;margin-bottom:12px">
-      <label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer">
-        <input type="checkbox" id="add-recurring"> 🔄 Recurring
-      </label>
-      <label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer">
-        <input type="checkbox" id="add-split"> 👥 Split bil
-      </label>
+      <label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer"><input type="checkbox" id="add-recurring"> 🔄 Recurring</label>
+      <label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer"><input type="checkbox" id="add-split"> 👥 Split bil</label>
     </div>
     <div id="add-msg"></div>
     <button class="action-btn" id="add-btn" onclick="saveTransaction()">Simpan transaksi ✓</button>
@@ -480,41 +462,47 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
 </div>
 
 <script>
+// ===== SUPABASE =====
 const { createClient } = supabase
 const sb = createClient(
   'https://gdyhlsfuxvbpbeeuxyak.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdkeWhsc2Z1eHZicGJlZXV4eWFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1NjMwNDksImV4cCI6MjA5NDEzOTA0OX0.CeGZ9IkAjHxlxHDt-7aTDjBPRC7w6O2ww2N-pARFpEg'
 )
+const SUPABASE_URL = 'SUPABASE_URL_HERE'
 
+// ===== STATE =====
 let currentUser=null,allTransactions=[],allDebts=[]
 let userProfile={},userBudgets={}
 let isLoginMode=true,selectedCat=''
 let currentMonth=new Date().getMonth(),currentYear=new Date().getFullYear()
+let receiptData=null
 const MONTHS=['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sep','Okt','Nov','Dis']
 const CAT_ICONS={Makan:'🍜',Transport:'⛽',Groceries:'🛒',Hiburan:'🎮',Bil:'📱',Lain:'📦'}
 const CAT_COLORS={Makan:'#E24B4A',Transport:'#378ADD',Groceries:'#639922',Hiburan:'#9B5DE5',Bil:'#BA7517',Lain:'#888'}
 const DAY_NAMES=['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu']
 
-// ===== THEME =====
-function setTheme(t){
-  document.documentElement.setAttribute('data-theme',t)
-  localStorage.setItem('duitku-theme',t)
-  document.querySelectorAll('.theme-btn').forEach(b=>b.textContent=t==='dark'?'☀️':'🌙')
+// ===== EDGE FUNCTION HELPER =====
+async function callEdge(fnName, body) {
+  const { data: { session } } = await sb.auth.getSession()
+  const res = await fetch(`${SUPABASE_URL}/functions/v1/${fnName}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session?.access_token || ''}`
+    },
+    body: JSON.stringify(body)
+  })
+  return res.json()
 }
+
+// ===== THEME =====
+function setTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('duitku-theme',t);document.querySelectorAll('.theme-btn').forEach(b=>b.textContent=t==='dark'?'☀️':'🌙')}
 function toggleTheme(){setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}
 setTheme(localStorage.getItem('duitku-theme')||'light')
 
-// ===== SCREEN HELPERS =====
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'))
-  document.getElementById(id).classList.add('active')
-}
-function showLogin(){showScreen('screen-login')}
-function showForgotPassword(){
-  document.getElementById('forgot-email').value=document.getElementById('login-email').value||''
-  document.getElementById('forgot-msg').innerHTML=''
-  showScreen('screen-forgot')
-}
+// ===== SCREEN =====
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function showForgotPassword(){document.getElementById('forgot-email').value=document.getElementById('login-email').value||'';document.getElementById('forgot-msg').innerHTML='';showScreen('screen-forgot')}
 
 // ===== AUTH =====
 function toggleMode(){
@@ -529,14 +517,11 @@ function toggleMode(){
 async function handleAuth(){
   const email=document.getElementById('login-email').value.trim()
   const password=document.getElementById('login-password').value
-  const btn=document.getElementById('login-btn')
-  const msgEl=document.getElementById('login-msg')
+  const btn=document.getElementById('login-btn'),msgEl=document.getElementById('login-msg')
   if(!email||!password){showMsg(msgEl,'Isi semua field dulu!','err');return}
   btn.disabled=true;btn.textContent='Loading...'
   try{
-    let result=isLoginMode
-      ?await sb.auth.signInWithPassword({email,password})
-      :await sb.auth.signUp({email,password})
+    let result=isLoginMode?await sb.auth.signInWithPassword({email,password}):await sb.auth.signUp({email,password})
     if(result.error) showMsg(msgEl,result.error.message,'err')
     else if(!isLoginMode&&!result.data.session) showMsg(msgEl,'Check email korang untuk verify! ✅','ok')
     else{currentUser=result.data.user;await loadApp()}
@@ -544,115 +529,67 @@ async function handleAuth(){
   btn.disabled=false;btn.textContent=isLoginMode?'Login ✓':'Daftar ✓'
 }
 
-// ===== FORGOT PASSWORD =====
 async function sendResetEmail(){
   const email=document.getElementById('forgot-email').value.trim()
-  const msgEl=document.getElementById('forgot-msg')
-  const btn=document.getElementById('forgot-btn')
+  const msgEl=document.getElementById('forgot-msg'),btn=document.getElementById('forgot-btn')
   if(!email){showMsg(msgEl,'Masukkan email dulu!','err');return}
   btn.disabled=true;btn.textContent='Menghantar...'
   try{
-    const {error}=await sb.auth.resetPasswordForEmail(email,{
-      redirectTo: window.location.origin+window.location.pathname
-    })
+    const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:window.location.origin+window.location.pathname})
     if(error) showMsg(msgEl,error.message,'err')
-    else{
-      showMsg(msgEl,'✅ Email reset dah dihantar! Check inbox (atau spam) korang.','ok')
-      btn.textContent='Dah dihantar! ✅'
-    }
+    else{showMsg(msgEl,'✅ Email reset dah dihantar! Check inbox korang.','ok');btn.textContent='Dah dihantar! ✅'}
   }catch(e){showMsg(msgEl,'Error: '+e.message,'err');btn.disabled=false;btn.textContent='Hantar Reset Link ✉️'}
 }
 
-// ===== RESET PASSWORD (from email link) =====
 function checkPwStrength(pw){
-  const bar=document.getElementById('pw-strength-bar')
-  const lbl=document.getElementById('pw-strength-label')
-  if(!pw){bar.style.background='var(--border)';bar.style.width='100%';lbl.textContent='';return}
-  let score=0
-  if(pw.length>=8) score++
-  if(pw.length>=12) score++
-  if(/[A-Z]/.test(pw)) score++
-  if(/[0-9]/.test(pw)) score++
-  if(/[^A-Za-z0-9]/.test(pw)) score++
-  const levels=[
-    {color:'var(--red)',label:'Lemah 😬'},
-    {color:'var(--amber)',label:'Okay lah 😐'},
-    {color:'var(--amber)',label:'Okay lah 😐'},
-    {color:'var(--green)',label:'Kuat! 💪'},
-    {color:'var(--green)',label:'Sangat kuat! 🔒'},
-    {color:'var(--green)',label:'Sangat kuat! 🔒'},
-  ]
-  const lvl=levels[score]||levels[0]
-  bar.style.background=lvl.color
-  bar.style.width=((score+1)/5*100)+'%'
-  lbl.style.color=lvl.color
-  lbl.textContent=lvl.label
+  const bar=document.getElementById('pw-strength-bar'),lbl=document.getElementById('pw-strength-label')
+  if(!pw){bar.style.background='var(--border)';lbl.textContent='';return}
+  let s=0;if(pw.length>=8)s++;if(pw.length>=12)s++;if(/[A-Z]/.test(pw))s++;if(/[0-9]/.test(pw))s++;if(/[^A-Za-z0-9]/.test(pw))s++
+  const lvls=[{c:'var(--red)',l:'Lemah 😬'},{c:'var(--amber)',l:'Okay 😐'},{c:'var(--amber)',l:'Okay 😐'},{c:'var(--green)',l:'Kuat! 💪'},{c:'var(--green)',l:'Sangat kuat! 🔒'},{c:'var(--green)',l:'Sangat kuat! 🔒'}]
+  const lvl=lvls[s]||lvls[0];bar.style.background=lvl.c;bar.style.width=((s+1)/5*100)+'%';lbl.style.color=lvl.c;lbl.textContent=lvl.l
 }
 
 async function updatePassword(){
-  const pw=document.getElementById('reset-password').value
-  const confirm=document.getElementById('reset-confirm').value
-  const msgEl=document.getElementById('reset-msg')
-  const btn=document.getElementById('reset-btn')
+  const pw=document.getElementById('reset-password').value,confirm=document.getElementById('reset-confirm').value
+  const msgEl=document.getElementById('reset-msg'),btn=document.getElementById('reset-btn')
   if(!pw||!confirm){showMsg(msgEl,'Isi semua field!','err');return}
-  if(pw.length<8){showMsg(msgEl,'Password kena sekurang-kurangnya 8 aksara!','err');return}
-  if(pw!==confirm){showMsg(msgEl,'Password tak sama! Cuba semula.','err');return}
+  if(pw.length<8){showMsg(msgEl,'Password kena min 8 aksara!','err');return}
+  if(pw!==confirm){showMsg(msgEl,'Password tak sama!','err');return}
   btn.disabled=true;btn.textContent='Updating...'
   try{
     const {error}=await sb.auth.updateUser({password:pw})
     if(error) showMsg(msgEl,error.message,'err')
     else{
       showMsg(msgEl,'✅ Password berjaya ditukar! Redirecting...','ok')
-      setTimeout(async()=>{
-        const {data:{session}}=await sb.auth.getSession()
-        if(session){currentUser=session.user;await loadApp()}
-        else showLogin()
-      },2000)
+      setTimeout(async()=>{const {data:{session}}=await sb.auth.getSession();if(session){currentUser=session.user;await loadApp()}else showScreen('screen-login')},2000)
     }
   }catch(e){showMsg(msgEl,'Error: '+e.message,'err')}
   btn.disabled=false;btn.textContent='Tukar Password ✓'
 }
 
-// ===== CHANGE PASSWORD FROM SETTINGS =====
 async function changePasswordFromSettings(){
-  const pw=document.getElementById('chg-password').value
-  const confirm=document.getElementById('chg-confirm').value
+  const pw=document.getElementById('chg-password').value,confirm=document.getElementById('chg-confirm').value
   const msgEl=document.getElementById('chg-pw-msg')
   if(!pw||!confirm){showMsg(msgEl,'Isi semua field!','err');return}
   if(pw.length<8){showMsg(msgEl,'Password kena min 8 aksara!','err');return}
   if(pw!==confirm){showMsg(msgEl,'Password tak sama!','err');return}
   const {error}=await sb.auth.updateUser({password:pw})
   if(error) showMsg(msgEl,error.message,'err')
-  else{
-    showMsg(msgEl,'✅ Password berjaya ditukar!','ok')
-    document.getElementById('chg-password').value=''
-    document.getElementById('chg-confirm').value=''
-  }
+  else{showMsg(msgEl,'✅ Password berjaya ditukar!','ok');document.getElementById('chg-password').value='';document.getElementById('chg-confirm').value=''}
 }
 
-async function logout(){
-  await sb.auth.signOut()
-  currentUser=null;allTransactions=[];allDebts=[];userProfile={};userBudgets={}
-  showLogin()
-}
+async function logout(){await sb.auth.signOut();currentUser=null;allTransactions=[];allDebts=[];userProfile={};userBudgets={};showScreen('screen-login')}
 
 // ===== LOAD APP =====
 async function loadApp(){
   showScreen('screen-app')
   await Promise.all([loadProfile(),loadBudgets(),loadTransactions(),loadDebts()])
-  updateMonthLabel()
-  renderHome()
+  updateMonthLabel();renderHome()
 }
 
 async function loadProfile(){
   const {data}=await sb.from('profiles').select('*').eq('id',currentUser.id).single()
-  if(data){
-    userProfile=data
-    document.getElementById('greeting').textContent='Helo, '+(data.name||currentUser.email.split('@')[0])+' ✨'
-    document.getElementById('set-name').value=data.name||''
-    document.getElementById('set-salary').value=data.salary||''
-    document.getElementById('set-goal').value=data.saving_goal||''
-  }
+  if(data){userProfile=data;document.getElementById('greeting').textContent='Helo, '+(data.name||currentUser.email.split('@')[0])+' ✨';document.getElementById('set-name').value=data.name||'';document.getElementById('set-salary').value=data.salary||'';document.getElementById('set-goal').value=data.saving_goal||''}
 }
 
 async function loadBudgets(){
@@ -671,10 +608,7 @@ async function loadTransactions(){
   allTransactions=data||[]
 }
 
-async function loadDebts(){
-  const stored=localStorage.getItem('duitku-debts-'+currentUser.id)
-  allDebts=stored?JSON.parse(stored):[]
-}
+async function loadDebts(){const stored=localStorage.getItem('duitku-debts-'+currentUser.id);allDebts=stored?JSON.parse(stored):[]}
 function saveDebtsLocal(){localStorage.setItem('duitku-debts-'+currentUser.id,JSON.stringify(allDebts))}
 
 // ===== RENDER HOME =====
@@ -682,28 +616,22 @@ function renderHome(){
   const mt=allTransactions.filter(t=>{const d=new Date(t.date);return d.getMonth()===currentMonth&&d.getFullYear()===currentYear})
   const income=mt.filter(t=>t.type==='in').reduce((a,b)=>a+b.amount,0)
   const expense=mt.filter(t=>t.type==='out').reduce((a,b)=>a+b.amount,0)
-  const balance=income-expense
-  const goal=userProfile.saving_goal||0
+  const balance=income-expense,goal=userProfile.saving_goal||0
   document.getElementById('home-balance').textContent=balance.toFixed(2)
   document.getElementById('home-income').textContent='RM '+income.toFixed(2)
   document.getElementById('home-expense').textContent='RM '+expense.toFixed(2)
   const pct=goal>0?Math.min(100,Math.round((balance/goal)*100)):0
-  document.getElementById('goal-fill').style.width=pct+'%'
-  document.getElementById('goal-pct').textContent=pct+'%'
-  renderBudgetBars(mt);renderRecentTxns(mt.slice(0,5))
-  renderDebts();renderSubscriptions();renderInsights(mt)
+  document.getElementById('goal-fill').style.width=pct+'%';document.getElementById('goal-pct').textContent=pct+'%'
+  renderBudgetBars(mt);renderRecentTxns(mt.slice(0,5));renderDebts();renderSubscriptions();renderInsights(mt)
 }
 
 function renderBudgetBars(mt){
-  const cats=Object.keys(userBudgets)
-  const el=document.getElementById('budget-bars'),warnEl=document.getElementById('budget-warn')
+  const cats=Object.keys(userBudgets),el=document.getElementById('budget-bars'),warnEl=document.getElementById('budget-warn')
   if(cats.length===0){el.innerHTML='<div class="empty"><div class="empty-icon">📊</div>Set budget kat Settings dulu!</div>';warnEl.style.display='none';return}
   let warns=[],html=''
   cats.forEach(cat=>{
-    const limit=userBudgets[cat]
-    const spent=mt.filter(t=>t.type==='out'&&t.category===cat).reduce((a,b)=>a+b.amount,0)
-    const pct=Math.min(100,Math.round((spent/limit)*100))
-    const color=CAT_COLORS[cat]||'#888'
+    const limit=userBudgets[cat],spent=mt.filter(t=>t.type==='out'&&t.category===cat).reduce((a,b)=>a+b.amount,0)
+    const pct=Math.min(100,Math.round((spent/limit)*100)),color=CAT_COLORS[cat]||'#888'
     if(pct>=80) warns.push(cat+' '+pct+'%')
     html+=`<div class="bitem"><div class="brow"><div class="bcat"><div class="bdot" style="background:${color}"></div>${cat}</div><div class="bamt"><b>RM ${spent.toFixed(0)}</b> / ${limit}</div></div><div class="btrack"><div class="bfill" style="width:${pct}%;background:${color}"></div></div></div>`
   })
@@ -715,18 +643,7 @@ function renderBudgetBars(mt){
 function renderRecentTxns(txns){
   const el=document.getElementById('recent-txns')
   if(txns.length===0){el.innerHTML='<div class="empty"><div class="empty-icon">🌸</div>Belum ada transaksi lagi<br><small>Tap + untuk tambah!</small></div>';return}
-  el.innerHTML=txns.map(t=>`
-    <div class="txn">
-      <div class="txn-ico">${CAT_ICONS[t.category]||'💰'}</div>
-      <div class="txn-body">
-        <div class="txn-name">${t.name}${t.is_recurring?'<span class="badge auto">Auto</span>':''}${t.is_split?'<span class="badge split">Split</span>':''}</div>
-        <div class="txn-date">${t.date} · ${t.category||'Lain'}</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:4px">
-        <div class="txn-amt ${t.type==='in'?'val-g':'val-r'}">${t.type==='in'?'+':'-'}RM ${t.amount.toFixed(2)}</div>
-        <button class="txn-del" onclick="deleteTxn('${t.id}')">🗑️</button>
-      </div>
-    </div>`).join('')
+  el.innerHTML=txns.map(t=>`<div class="txn"><div class="txn-ico">${CAT_ICONS[t.category]||'💰'}</div><div class="txn-body"><div class="txn-name">${t.name}${t.is_recurring?'<span class="badge auto">Auto</span>':''}${t.is_split?'<span class="badge split">Split</span>':''}</div><div class="txn-date">${t.date} · ${t.category||'Lain'}</div></div><div style="display:flex;align-items:center;gap:4px"><div class="txn-amt ${t.type==='in'?'val-g':'val-r'}">${t.type==='in'?'+':'-'}RM ${t.amount.toFixed(2)}</div><button class="txn-del" onclick="deleteTxn('${t.id}')">🗑️</button></div></div>`).join('')
 }
 
 function renderDebts(){
@@ -734,18 +651,8 @@ function renderDebts(){
   const unsettled=allDebts.filter(d=>!d.settled)
   if(unsettled.length===0){el.innerHTML='<div class="empty" style="padding:12px 0"><div class="empty-icon">🤝</div>Takde hutang — clean! 😎</div>';sumEl.style.display='none';return}
   const total=unsettled.reduce((a,b)=>a+b.amount,0)
-  el.innerHTML=unsettled.map(d=>`
-    <div class="debt-item">
-      <div class="debt-avatar">${d.name.charAt(0).toUpperCase()}</div>
-      <div class="debt-body"><div class="debt-name">${d.name}</div><div class="debt-note">${d.note||d.date}</div></div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <div class="debt-amt">RM ${d.amount.toFixed(2)}</div>
-        <button class="settle-btn" onclick="settleDebt('${d.id}')">Settle ✓</button>
-      </div>
-    </div>`).join('')
-  sumEl.style.display='flex'
-  document.getElementById('debt-total').textContent='RM '+total.toFixed(2)
-  document.getElementById('ins-debt').textContent='RM '+total.toFixed(0)
+  el.innerHTML=unsettled.map(d=>`<div class="debt-item"><div class="debt-avatar">${d.name.charAt(0).toUpperCase()}</div><div class="debt-body"><div class="debt-name">${d.name}</div><div class="debt-note">${d.note||d.date}</div></div><div style="display:flex;align-items:center;gap:8px"><div class="debt-amt">RM ${d.amount.toFixed(2)}</div><button class="settle-btn" onclick="settleDebt('${d.id}')">Settle ✓</button></div></div>`).join('')
+  sumEl.style.display='flex';document.getElementById('debt-total').textContent='RM '+total.toFixed(2);document.getElementById('ins-debt').textContent='RM '+total.toFixed(0)
 }
 
 function renderSubscriptions(){
@@ -755,19 +662,12 @@ function renderSubscriptions(){
   const subs=Object.values(unique)
   if(subs.length===0){el.innerHTML='<div class="empty" style="padding:12px 0"><div class="empty-icon">✨</div>Takde recurring bills lagi</div>';sumEl.style.display='none';return}
   const total=subs.reduce((a,b)=>a+b.amount,0)
-  el.innerHTML=subs.map(t=>`
-    <div class="sub-item">
-      <div class="sub-ico">${CAT_ICONS[t.category]||'📦'}</div>
-      <div class="sub-body"><div class="sub-name">${t.name}</div><div class="sub-date">${t.category} · recurring</div></div>
-      <div class="sub-amt">RM ${t.amount.toFixed(2)}</div>
-    </div>`).join('')
-  sumEl.style.display='flex'
-  document.getElementById('sub-total').textContent='RM '+total.toFixed(2)
+  el.innerHTML=subs.map(t=>`<div class="sub-item"><div class="sub-ico">${CAT_ICONS[t.category]||'📦'}</div><div class="sub-body"><div class="sub-name">${t.name}</div><div class="sub-date">${t.category} · recurring</div></div><div class="sub-amt">RM ${t.amount.toFixed(2)}</div></div>`).join('')
+  sumEl.style.display='flex';document.getElementById('sub-total').textContent='RM '+total.toFixed(2)
 }
 
 function renderInsights(mt){
-  const out=mt.filter(t=>t.type==='out')
-  const dayCount={}
+  const out=mt.filter(t=>t.type==='out'),dayCount={}
   out.forEach(t=>{const d=new Date(t.date);const day=DAY_NAMES[d.getDay()];dayCount[day]=(dayCount[day]||0)+t.amount})
   const topDay=Object.entries(dayCount).sort((a,b)=>b[1]-a[1])[0]
   document.getElementById('ins-day').textContent=topDay?topDay[0]:'—'
@@ -783,48 +683,14 @@ function renderHistory(){
   const el=document.getElementById('history-list')
   if(allTransactions.length===0){el.innerHTML='<div class="empty"><div class="empty-icon">🕐</div>Belum ada history lagi</div>';return}
   const grouped={}
-  allTransactions.forEach(t=>{
-    const d=new Date(t.date)
-    const key=MONTHS[d.getMonth()]+' '+d.getFullYear()
-    const sortKey=d.getFullYear()*100+d.getMonth()
-    if(!grouped[key]) grouped[key]={txns:[],sortKey}
-    grouped[key].txns.push(t)
-  })
+  allTransactions.forEach(t=>{const d=new Date(t.date);const key=MONTHS[d.getMonth()]+' '+d.getFullYear();const sk=d.getFullYear()*100+d.getMonth();if(!grouped[key])grouped[key]={txns:[],sk};grouped[key].txns.push(t)})
   let html=''
-  Object.entries(grouped).sort((a,b)=>b[1].sortKey-a[1].sortKey).forEach(([month,{txns}])=>{
-    const inc=txns.filter(t=>t.type==='in').reduce((a,b)=>a+b.amount,0)
-    const exp=txns.filter(t=>t.type==='out').reduce((a,b)=>a+b.amount,0)
-    const bal=inc-exp
-    const ws=[0,0,0,0,0]
-    txns.filter(t=>t.type==='out').forEach(t=>{const d=new Date(t.date);const w=Math.min(4,Math.floor((d.getDate()-1)/7));ws[w]+=t.amount})
-    const maxW=Math.max(...ws,1)
-    const bars=ws.map((v,i)=>`<div class="mini-bar" style="flex:1;height:${Math.round((v/maxW)*100)}%;background:${v===Math.max(...ws)?'var(--red)':'var(--green)'}"></div>`).join('')
-    html+=`
-    <div class="hist-month-lbl">${month}</div>
-    <div class="hist-card">
-      <div class="hist-row">
-        <div class="hist-lbl">${month}</div>
-        <div style="font-size:12px;font-weight:700;color:${bal>=0?'var(--green)':'var(--red)'}">
-          ${bal>=0?'Saved':'Over'} RM ${Math.abs(bal).toFixed(0)} ${bal>=0?'🎉':'😬'}
-        </div>
-      </div>
-      <div class="mini-bars">${bars}</div>
-      <div style="display:flex;gap:3px;margin-top:3px;margin-bottom:10px">
-        ${ws.map((_,i)=>`<span style="flex:1;font-size:9px;color:var(--muted);text-align:center">W${i+1}</span>`).join('')}
-      </div>
-      ${txns.map(t=>`
-        <div class="txn">
-          <div class="txn-ico">${CAT_ICONS[t.category]||'💰'}</div>
-          <div class="txn-body">
-            <div class="txn-name">${t.name}${t.is_recurring?'<span class="badge auto">Auto</span>':''}${t.is_split?'<span class="badge split">Split</span>':''}</div>
-            <div class="txn-date">${t.date} · ${t.category||'Lain'}</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:4px">
-            <div class="txn-amt ${t.type==='in'?'val-g':'val-r'}">${t.type==='in'?'+':'-'}RM ${t.amount.toFixed(2)}</div>
-            <button class="txn-del" onclick="deleteTxn('${t.id}')">🗑️</button>
-          </div>
-        </div>`).join('')}
-    </div>`
+  Object.entries(grouped).sort((a,b)=>b[1].sk-a[1].sk).forEach(([month,{txns}])=>{
+    const inc=txns.filter(t=>t.type==='in').reduce((a,b)=>a+b.amount,0),exp=txns.filter(t=>t.type==='out').reduce((a,b)=>a+b.amount,0),bal=inc-exp
+    const ws=[0,0,0,0,0];txns.filter(t=>t.type==='out').forEach(t=>{const d=new Date(t.date);ws[Math.min(4,Math.floor((d.getDate()-1)/7))]+=t.amount})
+    const mW=Math.max(...ws,1)
+    const bars=ws.map((v,i)=>`<div class="mini-bar" style="flex:1;height:${Math.round((v/mW)*100)}%;background:${v===Math.max(...ws)?'var(--red)':'var(--green)'}"></div>`).join('')
+    html+=`<div class="hist-month-lbl">${month}</div><div class="hist-card"><div class="hist-row"><div class="hist-lbl">${month}</div><div style="font-size:12px;font-weight:700;color:${bal>=0?'var(--green)':'var(--red)'}">${bal>=0?'Saved':'Over'} RM ${Math.abs(bal).toFixed(0)} ${bal>=0?'🎉':'😬'}</div></div><div class="mini-bars">${bars}</div><div style="display:flex;gap:3px;margin-top:3px;margin-bottom:10px">${ws.map((_,i)=>`<span style="flex:1;font-size:9px;color:var(--muted);text-align:center">W${i+1}</span>`).join('')}</div>${txns.map(t=>`<div class="txn"><div class="txn-ico">${CAT_ICONS[t.category]||'💰'}</div><div class="txn-body"><div class="txn-name">${t.name}${t.is_recurring?'<span class="badge auto">Auto</span>':''}${t.is_split?'<span class="badge split">Split</span>':''}</div><div class="txn-date">${t.date} · ${t.category||'Lain'}</div></div><div style="display:flex;align-items:center;gap:4px"><div class="txn-amt ${t.type==='in'?'val-g':'val-r'}">${t.type==='in'?'+':'-'}RM ${t.amount.toFixed(2)}</div><button class="txn-del" onclick="deleteTxn('${t.id}')">🗑️</button></div></div>`).join('')}</div>`
   })
   el.innerHTML=html
 }
@@ -832,63 +698,59 @@ function renderHistory(){
 // ===== TRANSACTIONS =====
 function showAddModal(){
   document.getElementById('add-date').value=new Date().toISOString().split('T')[0]
-  document.getElementById('add-name').value=''
-  document.getElementById('add-amount').value=''
-  document.getElementById('add-type').value='out'
-  document.getElementById('add-recurring').checked=false
-  document.getElementById('add-split').checked=false
-  document.getElementById('add-msg').innerHTML=''
+  document.getElementById('add-name').value='';document.getElementById('add-amount').value=''
+  document.getElementById('add-type').value='out';document.getElementById('add-recurring').checked=false
+  document.getElementById('add-split').checked=false;document.getElementById('add-msg').innerHTML=''
   selectedCat='';document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('sel'))
+  document.getElementById('ai-cat-btn').textContent='🧠 AI Auto-Detect Kategori ↗'
   document.getElementById('add-modal').classList.add('show')
 }
+
 function selCat(el,cat){document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');selectedCat=cat}
 
-async function saveTransaction(){
+async function autoCategory(){
   const name=document.getElementById('add-name').value.trim()
-  const amount=document.getElementById('add-amount').value
-  const type=document.getElementById('add-type').value
-  const date=document.getElementById('add-date').value
-  const msgEl=document.getElementById('add-msg')
-  const btn=document.getElementById('add-btn')
+  const btn=document.getElementById('ai-cat-btn')
+  if(!name){showMsg(document.getElementById('add-msg'),'Masukkan nama dulu!','err');return}
+  btn.disabled=true;btn.textContent='AI thinking... 🤔'
+  try{
+    const data=await callEdge('ai-categorize',{name})
+    if(data.category){
+      const matched=data.category
+      document.querySelectorAll('.cat-btn').forEach(b=>{if(b.textContent.includes(matched))b.click()})
+      btn.textContent='✓ AI detect: '+matched
+    } else btn.textContent='🧠 AI Auto-Detect Kategori ↗'
+  }catch(e){btn.textContent='🧠 AI Auto-Detect Kategori ↗'}
+  btn.disabled=false
+}
+
+async function saveTransaction(){
+  const name=document.getElementById('add-name').value.trim(),amount=document.getElementById('add-amount').value
+  const type=document.getElementById('add-type').value,date=document.getElementById('add-date').value
+  const msgEl=document.getElementById('add-msg'),btn=document.getElementById('add-btn')
   if(!name||!amount){showMsg(msgEl,'Isi nama dan amaun dulu!','err');return}
   btn.disabled=true;btn.textContent='Saving...'
-  const {error}=await sb.from('transactions').insert({
-    user_id:currentUser.id,name,amount:parseFloat(amount),type,
-    category:selectedCat||'Lain',date,
-    is_recurring:document.getElementById('add-recurring').checked,
-    is_split:document.getElementById('add-split').checked
-  })
+  const {error}=await sb.from('transactions').insert({user_id:currentUser.id,name,amount:parseFloat(amount),type,category:selectedCat||'Lain',date,is_recurring:document.getElementById('add-recurring').checked,is_split:document.getElementById('add-split').checked})
   if(error) showMsg(msgEl,error.message,'err')
-  else{
-    hideModal('add-modal')
-    await loadTransactions()
-    renderHome()
-    if(document.getElementById('tab-history').style.display!=='none') renderHistory()
-  }
+  else{hideModal('add-modal');await loadTransactions();renderHome();if(document.getElementById('tab-history').style.display!=='none')renderHistory()}
   btn.disabled=false;btn.textContent='Simpan transaksi ✓'
 }
 
 async function deleteTxn(id){
   if(!confirm('Delete transaksi ni?')) return
-  await sb.from('transactions').delete().eq('id',id)
-  await loadTransactions();renderHome()
+  await sb.from('transactions').delete().eq('id',id);await loadTransactions();renderHome()
   if(document.getElementById('tab-history').style.display!=='none') renderHistory()
 }
 
 // ===== DEBT =====
 function showDebtModal(){
-  document.getElementById('debt-name').value=''
-  document.getElementById('debt-amount').value=''
-  document.getElementById('debt-note').value=''
-  document.getElementById('debt-date').value=new Date().toISOString().split('T')[0]
-  document.getElementById('debt-msg').innerHTML=''
-  document.getElementById('debt-modal').classList.add('show')
+  document.getElementById('debt-name').value='';document.getElementById('debt-amount').value=''
+  document.getElementById('debt-note').value='';document.getElementById('debt-date').value=new Date().toISOString().split('T')[0]
+  document.getElementById('debt-msg').innerHTML='';document.getElementById('debt-modal').classList.add('show')
 }
 function saveDebt(){
-  const name=document.getElementById('debt-name').value.trim()
-  const amount=document.getElementById('debt-amount').value
-  const note=document.getElementById('debt-note').value.trim()
-  const date=document.getElementById('debt-date').value
+  const name=document.getElementById('debt-name').value.trim(),amount=document.getElementById('debt-amount').value
+  const note=document.getElementById('debt-note').value.trim(),date=document.getElementById('debt-date').value
   const msgEl=document.getElementById('debt-msg')
   if(!name||!amount){showMsg(msgEl,'Isi nama dan amaun!','err');return}
   allDebts.push({id:Date.now().toString(),name,amount:parseFloat(amount),note,date,settled:false})
@@ -896,83 +758,137 @@ function saveDebt(){
 }
 function settleDebt(id){const d=allDebts.find(d=>d.id===id);if(d)d.settled=true;saveDebtsLocal();renderDebts()}
 
+// ===== AI FEATURES =====
+async function handleReceipt(e){
+  const file=e.target.files[0];if(!file)return
+  const reader=new FileReader()
+  reader.onload=async function(ev){
+    const base64=ev.target.result.split(',')[1]
+    document.getElementById('upload-preview-wrap').innerHTML=`<img class="preview-img" src="${ev.target.result}">`
+    const res=document.getElementById('receipt-result'),txt=document.getElementById('receipt-text')
+    res.style.display='block';txt.className='ai-result loading';txt.textContent='Scanning resit korang... 🔍'
+    try{
+      const data=await callEdge('ai-receipt',{imageBase64:base64,mediaType:file.type||'image/jpeg'})
+      if(data.result){
+        txt.className='ai-result';txt.textContent=data.result
+        // Parse untuk auto-fill
+        const lines=data.result.split('\n')
+        const amtLine=lines.find(l=>l.startsWith('Amount:'))
+        const catLine=lines.find(l=>l.startsWith('Category:'))
+        const merchantLine=lines.find(l=>l.startsWith('Merchant:'))
+        if(amtLine){const amt=amtLine.replace('Amount: RM','').trim();receiptData={amount:amt,merchant:merchantLine?.replace('Merchant:','').trim()||'',category:catLine?.replace('Category:','').trim()||'Lain'}}
+      } else txt.textContent='⚠️ Tak dapat scan resit. Cuba upload semula.'
+    }catch(e2){txt.className='ai-result';txt.textContent='⚠️ Scan failed. Cuba upload semula.'}
+  }
+  reader.readAsDataURL(file)
+}
+
+function saveFromReceipt(){
+  if(receiptData){
+    document.getElementById('add-amount').value=receiptData.amount
+    document.getElementById('add-name').value=receiptData.merchant
+    document.querySelectorAll('.cat-btn').forEach(b=>{if(b.textContent.includes(receiptData.category))b.click()})
+  }
+  showAddModal()
+}
+
+async function runForecast(){
+  const btn=document.getElementById('forecast-btn'),res=document.getElementById('forecast-result'),txt=document.getElementById('forecast-text')
+  btn.disabled=true;btn.textContent='AI forecasting... 🔮'
+  res.style.display='block';txt.className='ai-result loading';txt.textContent='Analyzing spending pattern korang...'
+  try{
+    const mt=allTransactions.filter(t=>{const d=new Date(t.date);return d.getMonth()===currentMonth&&d.getFullYear()===currentYear})
+    const data=await callEdge('ai-forecast',{transactions:mt,budgets:userBudgets,income:userProfile.salary||0,month:MONTHS[currentMonth]+' '+currentYear})
+    txt.className='ai-result';txt.textContent=data.result||'⚠️ Tak dapat generate forecast.'
+  }catch(e){txt.className='ai-result';txt.textContent='⚠️ AI unavailable. Cuba lagi.'}
+  btn.disabled=false;btn.textContent='Generate Forecast ↗'
+}
+
+async function runSummary(){
+  const btn=document.getElementById('summary-btn'),res=document.getElementById('summary-result'),txt=document.getElementById('summary-text')
+  btn.disabled=true;btn.textContent='Generating... ✍️'
+  res.style.display='block';txt.className='ai-result loading';txt.textContent='Tulis summary korang...'
+  try{
+    const mt=allTransactions.filter(t=>{const d=new Date(t.date);return d.getMonth()===currentMonth&&d.getFullYear()===currentYear})
+    const data=await callEdge('ai-summary',{transactions:mt,budgets:userBudgets,income:userProfile.salary||0,savingGoal:userProfile.saving_goal||0,month:MONTHS[currentMonth]+' '+currentYear,userName:userProfile.name||currentUser.email.split('@')[0]})
+    txt.className='ai-result';txt.textContent=data.result||'⚠️ Tak dapat generate summary.'
+  }catch(e){txt.className='ai-result';txt.textContent='⚠️ AI unavailable. Cuba lagi.'}
+  btn.disabled=false;btn.textContent='Generate Summary ↗'
+}
+
+async function runRoast(){
+  const btn=document.getElementById('roast-btn'),res=document.getElementById('roast-result')
+  const sn=document.getElementById('roast-score-num'),gr=document.getElementById('roast-grade'),txt=document.getElementById('roast-text')
+  btn.disabled=true;btn.textContent='Roasting... 🔥'
+  res.style.display='block';txt.className='ai-result loading';sn.textContent='...';txt.textContent='AI tengah analyze spending korang...'
+  try{
+    const mt=allTransactions.filter(t=>{const d=new Date(t.date);return d.getMonth()===currentMonth&&d.getFullYear()===currentYear})
+    const data=await callEdge('ai-roast',{transactions:mt,budgets:userBudgets,income:userProfile.salary||0,savingGoal:userProfile.saving_goal||0,month:MONTHS[currentMonth]+' '+currentYear,userName:userProfile.name||currentUser.email.split('@')[0]})
+    if(data.score){
+      const score=parseInt(data.score)
+      sn.textContent=data.score
+      const ring=document.getElementById('score-ring')
+      const color=score>=70?'var(--green)':score>=50?'var(--amber)':'var(--red)'
+      ring.style.borderColor=color;sn.style.color=color
+      gr.textContent=data.grade
+      txt.className='ai-result';txt.textContent=data.roast+(data.tip?'\n\n💡 Tip: '+data.tip:'')
+    } else{txt.className='ai-result';txt.textContent='⚠️ Tak dapat generate roast.';sn.textContent='—'}
+  }catch(e){txt.className='ai-result';txt.textContent='⚠️ AI unavailable. Cuba lagi.';sn.textContent='—'}
+  btn.disabled=false;btn.textContent='Roast My Spending 🔥'
+}
+
+function switchAITab(idx){
+  document.querySelectorAll('.ai-tab').forEach((t,i)=>t.classList.toggle('active',i===idx))
+  document.querySelectorAll('[id^="ai-tab-"]').forEach((t,i)=>t.style.display=i===idx?'block':'none')
+}
+
 // ===== SETTINGS =====
 async function saveSettings(){
   const msgEl=document.getElementById('settings-msg')
-  const name=document.getElementById('set-name').value
-  const salary=parseFloat(document.getElementById('set-salary').value)||0
-  const goal=parseFloat(document.getElementById('set-goal').value)||0
+  const name=document.getElementById('set-name').value,salary=parseFloat(document.getElementById('set-salary').value)||0,goal=parseFloat(document.getElementById('set-goal').value)||0
   const {error}=await sb.from('profiles').upsert({id:currentUser.id,name,salary,saving_goal:goal})
   if(error){showMsg(msgEl,error.message,'err');return}
   userProfile={...userProfile,name,salary,saving_goal:goal}
   await sb.from('budgets').delete().eq('user_id',currentUser.id)
-  const cats=['Makan','Transport','Groceries','Hiburan','Bil']
-  const ids=['bud-makan','bud-transport','bud-groceries','bud-hiburan','bud-bil']
-  const newBudgets=cats.map((cat,i)=>({user_id:currentUser.id,category:cat,limit_amount:parseFloat(document.getElementById(ids[i]).value)||0})).filter(b=>b.limit_amount>0)
-  if(newBudgets.length>0) await sb.from('budgets').insert(newBudgets)
-  await loadBudgets()
-  document.getElementById('greeting').textContent='Helo, '+(name||currentUser.email.split('@')[0])+' ✨'
-  renderHome();showMsg(msgEl,'Settings saved! ✓','ok')
+  const cats=['Makan','Transport','Groceries','Hiburan','Bil'],ids=['bud-makan','bud-transport','bud-groceries','bud-hiburan','bud-bil']
+  const nb=cats.map((cat,i)=>({user_id:currentUser.id,category:cat,limit_amount:parseFloat(document.getElementById(ids[i]).value)||0})).filter(b=>b.limit_amount>0)
+  if(nb.length>0) await sb.from('budgets').insert(nb)
+  await loadBudgets();document.getElementById('greeting').textContent='Helo, '+(name||currentUser.email.split('@')[0])+' ✨';renderHome();showMsg(msgEl,'Settings saved! ✓','ok')
 }
 
 // ===== NAV =====
 function switchTab(tab){
   document.querySelectorAll('[id^="tab-"]').forEach(el=>el.style.display='none')
   document.querySelectorAll('.navitem').forEach(el=>el.classList.remove('active'))
-  document.getElementById('tab-'+tab).style.display='block'
-  document.getElementById('nav-'+tab).classList.add('active')
+  document.getElementById('tab-'+tab).style.display='block';document.getElementById('nav-'+tab).classList.add('active')
   if(tab==='history') renderHistory()
 }
-function changeMonth(dir){
-  currentMonth+=dir
-  if(currentMonth>11){currentMonth=0;currentYear++}
-  if(currentMonth<0){currentMonth=11;currentYear--}
-  updateMonthLabel();renderHome()
-}
+function changeMonth(dir){currentMonth+=dir;if(currentMonth>11){currentMonth=0;currentYear++}if(currentMonth<0){currentMonth=11;currentYear--}updateMonthLabel();renderHome()}
 function updateMonthLabel(){document.getElementById('month-label').textContent=MONTHS[currentMonth]+' '+currentYear}
 
 // ===== UTILS =====
-function showMsg(el,text,type){
-  el.innerHTML=`<div class="msg ${type}">${text}</div>`
-  if(type==='ok') setTimeout(()=>el.innerHTML='',4000)
-}
+function showMsg(el,text,type){el.innerHTML=`<div class="msg ${type}">${text}</div>`;if(type==='ok')setTimeout(()=>el.innerHTML='',4000)}
 function hideModal(id){document.getElementById(id).classList.remove('show')}
 
-// ===== INIT — handle password reset redirect =====
+// ===== INIT =====
 ;(async()=>{
-  // Check if redirected from password reset email
-  const hash=window.location.hash
-  const params=new URLSearchParams(hash.replace('#','?'))
-  const accessToken=params.get('access_token')
-  const type=params.get('type')
-
-  if(accessToken && type==='recovery'){
-    // Set the session from the token in URL
-    const {data,error}=await sb.auth.setSession({
-      access_token: accessToken,
-      refresh_token: params.get('refresh_token')||''
-    })
-    if(!error && data.session){
-      // Clear hash from URL
-      history.replaceState(null,'',window.location.pathname)
-      // Show reset password screen
-      showScreen('screen-reset')
-      return
-    }
+  const hash=window.location.hash,params=new URLSearchParams(hash.replace('#','?'))
+  const accessToken=params.get('access_token'),type=params.get('type')
+  if(accessToken&&type==='recovery'){
+    const {data,error}=await sb.auth.setSession({access_token:accessToken,refresh_token:params.get('refresh_token')||''})
+    if(!error&&data.session){history.replaceState(null,'',window.location.pathname);showScreen('screen-reset');return}
   }
-
-  // Normal session check
   const {data:{session}}=await sb.auth.getSession()
   if(session){currentUser=session.user;await loadApp()}
 })()
 
 window.addEventListener('keydown',e=>{
-  if(e.key==='Enter'){
-    const active=document.querySelector('.screen.active')
-    if(active&&active.id==='screen-login') handleAuth()
-    if(active&&active.id==='screen-forgot') sendResetEmail()
-    if(active&&active.id==='screen-reset') updatePassword()
-  }
+  if(e.key!=='Enter') return
+  const active=document.querySelector('.screen.active')
+  if(!active) return
+  if(active.id==='screen-login') handleAuth()
+  if(active.id==='screen-forgot') sendResetEmail()
+  if(active.id==='screen-reset') updatePassword()
 })
 </script>
 </body>
