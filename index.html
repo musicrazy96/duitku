@@ -236,7 +236,8 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
     <div class="topbar">
       <div class="brand-row">
         <svg width="38" height="38"><use href="#logo"/></svg>
-        <div class="brand-text"><div class="topbar-brand">duit<span>ku</span></div><div class="topbar-greeting" id="greeting">Helo ✨</div></div>
+        <div class="brand-text"><div class="topbar-brand">duit<span>ku</span></div><div class="topbar-greeting" id="greeting">Helo ✨</div>
+<div id="datetime" style="font-size:9px;color:var(--muted);font-weight:500;margin-top:1px"></div></div>
       </div>
       <div class="topbar-right">
         <div class="month-nav">
@@ -601,6 +602,20 @@ async function loadApp(){
   showScreen('screen-app')
   await Promise.all([loadProfile(),loadBudgets(),loadTransactions(),loadDebts()])
   updateMonthLabel();renderHome()
+  function updateDateTime(){
+  const now = new Date()
+  const days = ['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu']
+  const day = days[now.getDay()]
+  const date = now.getDate().toString().padStart(2,'0')
+  const month = (now.getMonth()+1).toString().padStart(2,'0')
+  const year = now.getFullYear()
+  const hours = now.getHours().toString().padStart(2,'0')
+  const mins = now.getMinutes().toString().padStart(2,'0')
+  const el = document.getElementById('datetime')
+  if(el) el.textContent = `${day}, ${date}/${month}/${year} ${hours}:${mins}`
+}
+updateDateTime()
+setInterval(updateDateTime, 1000)      
 }
 
 async function loadProfile(){
