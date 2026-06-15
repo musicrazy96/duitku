@@ -425,14 +425,19 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
     <div class="form-field"><label class="form-label">Amaun (RM)</label><input class="form-input" id="add-amount" type="number" placeholder="0.00"></div>
     <div class="form-field">
       <label class="form-label">Kategori</label>
-      <div class="cat-grid">
-        <button class="cat-btn" onclick="selCat(this,'Makan')">🍜 Makan</button>
-        <button class="cat-btn" onclick="selCat(this,'Transport')">🚗 Transport</button>
-        <button class="cat-btn" onclick="selCat(this,'Groceries')">🛒 Groceries</button>
-        <button class="cat-btn" onclick="selCat(this,'Hiburan')">🎮 Hiburan</button>
-        <button class="cat-btn" onclick="selCat(this,'Bil')">📱 Bil</button>
-        <button class="cat-btn" onclick="selCat(this,'Lain')">📦 Lain</button>
-      </div>
+      <div class="cat-grid" id="cat-grid-out">
+  <button class="cat-btn" onclick="selCat(this,'Makan')">🍜 Makan</button>
+  <button class="cat-btn" onclick="selCat(this,'Transport')">🚗 Transport</button>
+  <button class="cat-btn" onclick="selCat(this,'Groceries')">🛒 Groceries</button>
+  <button class="cat-btn" onclick="selCat(this,'Hiburan')">🎮 Hiburan</button>
+  <button class="cat-btn" onclick="selCat(this,'Bil')">📱 Bil</button>
+  <button class="cat-btn" onclick="selCat(this,'Sewa')">🏠 Sewa</button>
+  <button class="cat-btn" onclick="selCat(this,'Kesihatan')">💊 Kesihatan</button>
+  <button class="cat-btn" onclick="selCat(this,'Maintenance')">🔧 Maintenance</button>
+  <button class="cat-btn" onclick="selCat(this,'Pelaburan')">📈 Pelaburan</button>
+  <button class="cat-btn" onclick="selCat(this,'Diri Sendiri')">💆 Diri Sendiri</button>
+  <button class="cat-btn" onclick="selCat(this,'Lain')">📦 Lain</button>
+</div>
       <button class="ai-cat-btn" id="ai-cat-btn" onclick="autoCategory()">🧠 AI Auto-Detect Kategori ↗</button>
     </div>
     <div class="two-col" style="margin-bottom:10px">
@@ -477,8 +482,19 @@ let isLoginMode=true,selectedCat=''
 let currentMonth=new Date().getMonth(),currentYear=new Date().getFullYear()
 let receiptData=null
 const MONTHS=['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sep','Okt','Nov','Dis']
-const CAT_ICONS={Makan:'🍜',Transport:'⛽',Groceries:'🛒',Hiburan:'🎮',Bil:'📱',Lain:'📦'}
-const CAT_COLORS={Makan:'#E24B4A',Transport:'#378ADD',Groceries:'#639922',Hiburan:'#9B5DE5',Bil:'#BA7517',Lain:'#888'}
+const CAT_ICONS = {
+  Makan:'🍜', Transport:'⛽', Groceries:'🛒',
+  Hiburan:'🎮', Bil:'📱', Sewa:'🏠',
+  Kesihatan:'💊', Maintenance:'🔧', Pelaburan:'📈',
+  'Diri Sendiri':'💆', Lain:'📦',
+  Gaji:'💼', Freelance:'💰', Hadiah:'🎁'
+}
+const CAT_COLORS = {
+  Makan:'#E24B4A', Transport:'#378ADD', Groceries:'#639922',
+  Hiburan:'#9B5DE5', Bil:'#BA7517', Sewa:'#E8804A',
+  Kesihatan:'#D4537E', Maintenance:'#4A90A4', Pelaburan:'#2E9E6A',
+  'Diri Sendiri':'#F0935A', Lain:'#888'
+}
 const DAY_NAMES=['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu']
 
 // ===== EDGE FUNCTION HELPER =====
