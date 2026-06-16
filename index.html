@@ -4,8 +4,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DuitKu</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#E8804A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="DuitKu">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ===== PWA SERVICE WORKER =====
+if('serviceWorker' in navigator){
+  window.addEventListener('load', async () => {
+    try{
+      const reg = await navigator.serviceWorker.register('/duitku/sw.js')
+      setInterval(() => reg.update(), 30 * 60 * 1000)
+      reg.addEventListener('updatefound', () => {
+        const newSW = reg.installing
+        newSW.addEventListener('statechange', () => {
+          if(newSW.state === 'installed' && navigator.serviceWorker.controller){
+            const banner = document.createElement('div')
+            banner.id = 'update-banner'
+            banner.innerHTML = `<div style="position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:10px 16px;border-radius:14px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:10px;z-index:999;box-shadow:0 4px 14px rgba(0,0,0,0.2);font-family:'Nunito',sans-serif;max-width:360px;width:90%"><span>🔄 Update tersedia!</span><button onclick="applyUpdate()" style="background:#fff;color:var(--accent);border:none;border-radius:8px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif">Update ↗</button><button onclick="this.closest('#update-banner').remove()" style="background:none;border:none;color:#fff;cursor:pointer;font-size:16px;padding:0">×</button></div>`
+            document.body.appendChild(banner)
+            window._newSW = newSW
+          }
+        })
+      })
+    }catch(e){ console.log('SW registration failed:', e) }
+  })
+  let refreshing = false
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if(!refreshing){ refreshing = true; window.location.reload() }
+  })
+}
+function applyUpdate(){
+  if(window._newSW){
+    window._newSW.postMessage('skipWaiting')
+    document.getElementById('update-banner')?.remove()
+  }
+}
+</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root,[data-theme="light"]{
