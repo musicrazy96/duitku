@@ -443,6 +443,54 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
           <button class="action-btn sec" onclick="setTheme('dark')" style="margin-top:0;flex:1">🌙 Dark</button>
         </div>
       </div>
+      <div class="card" id="app-info-card">
+        <div class="card-title">App Info</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:16px">📦</span>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:var(--ink)">Versi semasa</div>
+                <div style="font-size:10px;color:var(--muted)" id="app-version">v1.0.0</div>
+              </div>
+            </div>
+            <span id="version-badge" style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--green-light);color:var(--green);border:1.5px solid var(--green)">✓ Latest</span>
+          </div>
+
+          <div style="height:1.5px;background:var(--border)"></div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:16px">🕐</span>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:var(--ink)">Last updated</div>
+                <div style="font-size:10px;color:var(--muted)" id="app-last-updated">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="height:1.5px;background:var(--border)"></div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:16px">📲</span>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:var(--ink)">PWA Status</div>
+                <div style="font-size:10px;color:var(--muted)" id="pwa-status">Checking...</div>
+              </div>
+            </div>
+            <span id="pwa-badge" style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--amber-light);color:var(--amber);border:1.5px solid var(--amber)">...</span>
+          </div>
+
+          <div style="height:1.5px;background:var(--border)"></div>
+
+          <button onclick="checkForUpdate()" id="check-update-btn" style="width:100%;background:var(--accent-light);border:1.5px solid var(--accent);border-radius:12px;padding:9px;font-size:12px;font-weight:700;color:var(--accent);cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:center;gap:6px">
+            🔄 Check for Update
+          </button>
+
+        </div>
+      </div>
       <div id="settings-msg"></div>
       <button class="action-btn" onclick="saveSettings()">Simpan settings ✓</button>
     </div>
@@ -940,6 +988,70 @@ function updateMonthLabel(){document.getElementById('month-label').textContent=M
 function showMsg(el,text,type){el.innerHTML=`<div class="msg ${type}">${text}</div>`;if(type==='ok')setTimeout(()=>el.innerHTML='',4000)}
 function hideModal(id){document.getElementById(id).classList.remove('show')}
 
+  // ===== APP INFO =====
+const APP_VERSION = 'v2.5'
+const APP_UPDATED = '16 Jun 2026'
+
+function initAppInfo() {
+  document.getElementById('app-version').textContent = APP_VERSION
+  document.getElementById('app-last-updated').textContent = APP_UPDATED
+
+  // Check PWA mode
+  const isPWA = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone
+  const pwaStatus = document.getElementById('pwa-status')
+  const pwaBadge = document.getElementById('pwa-badge')
+  if (isPWA) {
+    pwaStatus.textContent = 'Installed sebagai app'
+    pwaBadge.textContent = '✓ Installed'
+    pwaBadge.style.background = 'var(--green-light)'
+    pwaBadge.style.color = 'var(--green)'
+    pwaBadge.style.borderColor = 'var(--green)'
+  } else {
+    pwaStatus.textContent = 'Buka dalam browser'
+    pwaBadge.textContent = 'Browser'
+    pwaBadge.style.background = 'var(--blue-light)'
+    pwaBadge.style.color = 'var(--blue)'
+    pwaBadge.style.borderColor = 'var(--blue)'
+  }
+}
+
+async function checkForUpdate() {
+  const btn = document.getElementById('check-update-btn')
+  const badge = document.getElementById('version-badge')
+  btn.textContent = '⏳ Checking...'
+  btn.disabled = true
+
+  try {
+    const reg = await navigator.serviceWorker.getRegistration()
+    if (reg) {
+      await reg.update()
+      if (reg.waiting) {
+        badge.textContent = '⚡ Update ada!'
+        badge.style.background = 'var(--amber-light)'
+        badge.style.color = 'var(--amber)'
+        badge.style.borderColor = 'var(--amber)'
+        btn.textContent = '🔄 Apply Update'
+        btn.disabled = false
+        btn.onclick = () => { reg.waiting.postMessage('skipWaiting'); btn.textContent = '✓ Updating...' }
+      } else {
+        badge.textContent = '✓ Latest'
+        badge.style.background = 'var(--green-light)'
+        badge.style.color = 'var(--green)'
+        badge.style.borderColor = 'var(--green)'
+        btn.textContent = '✓ Dah latest!'
+        setTimeout(() => { btn.textContent = '🔄 Check for Update'; btn.disabled = false; btn.onclick = checkForUpdate }, 2000)
+      }
+    } else {
+      btn.textContent = '⚠️ SW not found'
+      setTimeout(() => { btn.textContent = '🔄 Check for Update'; btn.disabled = false }, 2000)
+    }
+  } catch(e) {
+    btn.textContent = '⚠️ Error checking'
+    setTimeout(() => { btn.textContent = '🔄 Check for Update'; btn.disabled = false }, 2000)
+  }
+}
+
+initAppInfo()
 // ===== INIT =====
 ;(async()=>{
   const hash=window.location.hash,params=new URLSearchParams(hash.replace('#','?'))
