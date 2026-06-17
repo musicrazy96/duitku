@@ -1180,10 +1180,13 @@ function showProfileSwitch() {
         <div style="font-size:13px;font-weight:700;color:var(--ink)">${p.name}</div>
         <div style="font-size:10px;color:var(--muted)">Saving goal: RM ${p.saving_goal || 0}</div>
       </div>
-      ${p.id === currentProfile?.id
-        ? '<span style="font-size:10px;font-weight:700;color:var(--accent)">✓ Aktif</span>'
-        : `<button onclick="confirmSwitchProfile('${p.id}')" style="background:var(--accent);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif">Pilih</button>`
-      }
+      <div style="display:flex;gap:6px;align-items:center">
+        ${p.id === currentProfile?.id
+          ? '<span style="font-size:10px;font-weight:700;color:var(--accent);background:var(--accent-light);padding:2px 8px;border-radius:8px;border:1.5px solid var(--accent)">Aktif</span>'
+          : `<button onclick="confirmSwitchProfile('${p.id}')" style="background:var(--surface);border:1.5px solid var(--border2);border-radius:8px;padding:4px 10px;font-size:10px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Nunito',sans-serif">Switch</button>`
+        }
+        <button onclick="showEditProfileModal('${p.id}')" style="background:var(--blue-light);border:1.5px solid var(--blue);border-radius:8px;padding:4px 10px;font-size:10px;font-weight:700;color:var(--blue);cursor:pointer;font-family:'Nunito',sans-serif">Edit</button>
+      </div>
     </div>
   `).join('')
   document.getElementById('switch-profile-modal').classList.add('show')
@@ -1251,6 +1254,56 @@ async function saveNewProfile() {
   const switchBtn = document.getElementById('profile-switch-btn')
   if (switchBtn) switchBtn.style.display = 'inline-block'
 }
+let editingProfileId = null
+let selectedEditModalAvatar = '👤'
+
+function showEditProfileModal(profileId) {
+  const p = allProfiles.find(p => p.id === profileId)
+  if (!p) return
+  editingProfileId = profileId
+  selectedEditModalAvatar = p.avatar || '👤'
+  document.getElementById('edit-profile-name').value = p.name
+  document.getElementById('edit-profile-salary').value = p.salary || ''
+  document.getElementById('edit-profile-goal').value = p.saving_goal || ''
+  document.getElementById('edit-avatar-preview').textContent = 'Avatar: ' + selectedEditModalAvatar
+  document.getElementById('edit-profile-msg').innerHTML = ''
+  document.getElementById('edit-profile-modal').classList.add('show')
+}
+
+function selectEditModalAvatar(emoji) {
+  selectedEditModalAvatar = emoji
+  document.getElementById('edit-avatar-preview').textContent = 'Avatar: ' + emoji
+  document.querySelectorAll('#edit-profile-modal span[onclick]').forEach(s => s.style.background = 'none')
+  event.target.style.background = 'var(--accent-light)'
+}
+
+async function saveEditProfile() {
+  const name = document.getElementById('edit-profile-name').value.trim()
+  const salary = parseFloat(document.getElementById('edit-profile-salary').value) || 0
+  const goal = parseFloat(document.getElementById('edit-profile-goal').value) || 0
+  const msgEl = document.getElementById('edit-profile-msg')
+
+  if (!name) { showMsg(msgEl, 'Masukkan nama!', 'err'); return }
+
+  const { error } = await sb.from('user_profiles').update({
+    name, salary, saving_goal: goal, avatar: selectedEditModalAvatar
+  }).eq('id', editingProfileId)
+
+  if (error) { showMsg(msgEl, error.message, 'err'); return }
+
+  // Update local state
+  allProfiles = allProfiles.map(p => p.id === editingProfileId
+    ? { ...p, name, salary, saving_goal: goal, avatar: selectedEditModalAvatar }
+    : p
+  )
+  if (currentProfile?.id === editingProfileId) {
+    currentProfile = { ...currentProfile, name, salary, saving_goal: goal, avatar: selectedEditModalAvatar }
+  }
+
+  hideModal('edit-profile-modal')
+  renderProfileUI()
+  renderHome()
+}
 // ===== INIT =====
 ;(async()=>{
   const hash=window.location.hash,params=new URLSearchParams(hash.replace('#','?'))
@@ -1301,6 +1354,28 @@ window.addEventListener('keydown',e=>{
     <div class="modal-title">Switch Profile ⇄ <button class="modal-close" onclick="hideModal('switch-profile-modal')">×</button></div>
     <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Pilih profile yang nak digunakan:</div>
     <div id="switch-profile-list" style="display:flex;flex-direction:column;gap:8px"></div>
+  </div>
+</div>
+<!-- EDIT PROFILE MODAL -->
+<div class="overlay" id="edit-profile-modal">
+  <div class="modal">
+    <div class="modal-title">Edit Profile ✏️ <button class="modal-close" onclick="hideModal('edit-profile-modal')">×</button></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
+      <span onclick="selectEditModalAvatar('👤')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">👤</span>
+      <span onclick="selectEditModalAvatar('👨')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">👨</span>
+      <span onclick="selectEditModalAvatar('👩')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">👩</span>
+      <span onclick="selectEditModalAvatar('🧑')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">🧑</span>
+      <span onclick="selectEditModalAvatar('👦')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">👦</span>
+      <span onclick="selectEditModalAvatar('👧')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">👧</span>
+      <span onclick="selectEditModalAvatar('🐱')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">🐱</span>
+      <span onclick="selectEditModalAvatar('🐶')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">🐶</span>
+    </div>
+    <div id="edit-avatar-preview" style="font-size:10px;color:var(--muted);margin-bottom:10px">Avatar: 👤</div>
+    <div class="form-field"><label class="form-label">Nama Profile</label><input class="form-input" id="edit-profile-name" placeholder="Nama"></div>
+    <div class="form-field"><label class="form-label">Gaji bulanan (RM)</label><input class="form-input" id="edit-profile-salary" type="number" placeholder="0.00"></div>
+    <div class="form-field"><label class="form-label">Saving goal (RM)</label><input class="form-input" id="edit-profile-goal" type="number" placeholder="0.00"></div>
+    <div id="edit-profile-msg"></div>
+    <button class="action-btn" onclick="saveEditProfile()">Simpan ✓</button>
   </div>
 </div>
 </body>
