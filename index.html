@@ -275,8 +275,14 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
     <div class="topbar">
       <div class="brand-row">
         <svg width="38" height="38"><use href="#logo"/></svg>
-        <div class="brand-text"><div class="topbar-brand">duit<span>ku</span></div><div class="topbar-greeting" id="greeting">Helo ✨</div>
-<div id="datetime" style="font-size:9px;color:var(--muted);font-weight:500;margin-top:1px"></div></div>
+        <div class="brand-text">
+  <div class="topbar-brand">duit<span>ku</span></div>
+  <div style="display:flex;align-items:center;gap:6px;margin-top:1px">
+    <div class="topbar-greeting" id="greeting">Helo ✨</div>
+    <button id="profile-switch-btn" onclick="showProfileSwitch()" style="background:var(--accent-light);border:1.5px solid var(--accent);border-radius:8px;padding:1px 7px;font-size:9px;font-weight:700;color:var(--accent);cursor:pointer;font-family:'Nunito',sans-serif;display:none">⇄</button>
+  </div>
+  <div id="datetime" style="font-size:9px;color:var(--muted);font-weight:500;margin-top:1px"></div>
+</div>
       </div>
       <div class="topbar-right">
         <div class="month-nav">
@@ -415,8 +421,35 @@ body{font-family:'Nunito',sans-serif;background:var(--page);max-width:430px;marg
       </div>
     </div>
     <div class="content">
+      <!-- PROFILE SWITCHER CARD -->
       <div class="card">
-        <div class="card-title">Profil</div>
+        <div class="section-header">
+          <div class="card-title" style="margin-bottom:0">Profiles 👥</div>
+          <button class="add-small" id="add-profile-btn" onclick="showAddProfileModal()">+ Tambah</button>
+        </div>
+        <div id="profile-list-settings" style="display:flex;flex-direction:column;gap:8px;margin-top:4px"></div>
+      </div>
+
+      <!-- EDIT PROFILE CARD -->
+      <div class="card">
+        <div class="card-title">Edit Profile Semasa</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:10px">
+          <div id="set-avatar-display" style="font-size:24px;cursor:pointer" onclick="toggleAvatarPicker()">👤</div>
+          <div>
+            <div style="font-size:11px;font-weight:700;color:var(--ink)" id="set-profile-name-display">—</div>
+            <div style="font-size:10px;color:var(--muted)">Tap emoji untuk tukar</div>
+          </div>
+        </div>
+        <div id="avatar-picker" style="display:none;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+          <span onclick="selectAvatar('👤')" style="font-size:22px;cursor:pointer;padding:4px">👤</span>
+          <span onclick="selectAvatar('👨')" style="font-size:22px;cursor:pointer;padding:4px">👨</span>
+          <span onclick="selectAvatar('👩')" style="font-size:22px;cursor:pointer;padding:4px">👩</span>
+          <span onclick="selectAvatar('🧑')" style="font-size:22px;cursor:pointer;padding:4px">🧑</span>
+          <span onclick="selectAvatar('👦')" style="font-size:22px;cursor:pointer;padding:4px">👦</span>
+          <span onclick="selectAvatar('👧')" style="font-size:22px;cursor:pointer;padding:4px">👧</span>
+          <span onclick="selectAvatar('🐱')" style="font-size:22px;cursor:pointer;padding:4px">🐱</span>
+          <span onclick="selectAvatar('🐶')" style="font-size:22px;cursor:pointer;padding:4px">🐶</span>
+        </div>
         <div class="form-field"><label class="form-label">Nama</label><input class="form-input" id="set-name" placeholder="Nama korang"></div>
         <div class="form-field"><label class="form-label">Gaji bulanan (RM)</label><input class="form-input" id="set-salary" type="number" placeholder="0.00"></div>
         <div class="form-field"><label class="form-label">Saving goal (RM)</label><input class="form-input" id="set-goal" type="number" placeholder="0.00"></div>
@@ -569,6 +602,10 @@ let userProfile={},userBudgets={}
 let isLoginMode=true,selectedCat=''
 let currentMonth=new Date().getMonth(),currentYear=new Date().getFullYear()
 let receiptData=null
+let currentProfile = null
+let allProfiles = []
+let selectedNewAvatar = '👤'
+let selectedEditAvatar = '👤'
 const MONTHS=['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sep','Okt','Nov','Dis']
 const CAT_ICONS = {
   Makan:'🍜', Transport:'⛽', Groceries:'🛒',
@@ -687,7 +724,7 @@ async function logout(){await sb.auth.signOut();currentUser=null;allTransactions
 // ===== LOAD APP =====
 async function loadApp(){
   showScreen('screen-app')
-  await Promise.all([loadProfile(),loadBudgets(),loadTransactions(),loadDebts()])
+  await Promise.all([loadProfiles(),loadBudgets(),loadTransactions(),loadDebts()])
   updateMonthLabel();renderHome()
   function updateDateTime(){
   const now = new Date()
@@ -711,7 +748,8 @@ async function loadProfile(){
 }
 
 async function loadBudgets(){
-  const {data}=await sb.from('budgets').select('*').eq('user_id',currentUser.id)
+  if (!currentProfile) return
+  const {data}=await sb.from('budgets').select('*').eq('user_id',currentUser.id).eq('profile_id',currentProfile.id)
   userBudgets={}
   if(data) data.forEach(b=>userBudgets[b.category]=b.limit_amount)
   document.getElementById('bud-makan').value=userBudgets['Makan']||''
@@ -722,8 +760,9 @@ async function loadBudgets(){
 }
 
 async function loadTransactions(){
-  const {data}=await sb.from('transactions').select('*').eq('user_id',currentUser.id).order('date',{ascending:false})
-  allTransactions=data||[]
+  if (!currentProfile) return
+  const {data}=await sb.from('transactions').select('*').eq('user_id',currentUser.id).eq('profile_id',currentProfile.id).order('date',{ascending:false})
+allTransactions=data||[]
 }
 
 async function loadDebts(){const stored=localStorage.getItem('duitku-debts-'+currentUser.id);allDebts=stored?JSON.parse(stored):[]}
@@ -848,7 +887,7 @@ async function saveTransaction(){
   const msgEl=document.getElementById('add-msg'),btn=document.getElementById('add-btn')
   if(!name||!amount){showMsg(msgEl,'Isi nama dan amaun dulu!','err');return}
   btn.disabled=true;btn.textContent='Saving...'
-  const {error}=await sb.from('transactions').insert({user_id:currentUser.id,name,amount:parseFloat(amount),type,category:selectedCat||'Lain',date,is_recurring:document.getElementById('add-recurring').checked,is_split:document.getElementById('add-split').checked})
+  const {error}=await sb.from('transactions').insert({user_id:currentUser.id,profile_id:currentProfile.id,name,amount:parseFloat(amount),type,category:selectedCat||'Lain',date,is_recurring:document.getElementById('add-recurring').checked,is_split:document.getElementById('add-split').checked})
   if(error) showMsg(msgEl,error.message,'err')
   else{hideModal('add-modal');await loadTransactions();renderHome();if(document.getElementById('tab-history').style.display!=='none')renderHistory()}
   btn.disabled=false;btn.textContent='Simpan transaksi ✓'
@@ -963,15 +1002,25 @@ function switchAITab(idx){
 // ===== SETTINGS =====
 async function saveSettings(){
   const msgEl=document.getElementById('settings-msg')
-  const name=document.getElementById('set-name').value,salary=parseFloat(document.getElementById('set-salary').value)||0,goal=parseFloat(document.getElementById('set-goal').value)||0
-  const {error}=await sb.from('profiles').upsert({id:currentUser.id,name,salary,saving_goal:goal})
+  const name=document.getElementById('set-name').value
+  const salary=parseFloat(document.getElementById('set-salary').value)||0
+  const goal=parseFloat(document.getElementById('set-goal').value)||0
+
+  const {error}=await sb.from('user_profiles').update({name, salary, saving_goal:goal, avatar:selectedEditAvatar}).eq('id',currentProfile.id)
   if(error){showMsg(msgEl,error.message,'err');return}
-  userProfile={...userProfile,name,salary,saving_goal:goal}
-  await sb.from('budgets').delete().eq('user_id',currentUser.id)
+
+  currentProfile={...currentProfile,name,salary,saving_goal:goal,avatar:selectedEditAvatar}
+  allProfiles=allProfiles.map(p=>p.id===currentProfile.id?currentProfile:p)
+
+  await sb.from('budgets').delete().eq('user_id',currentUser.id).eq('profile_id',currentProfile.id)
   const cats=['Makan','Transport','Groceries','Hiburan','Bil'],ids=['bud-makan','bud-transport','bud-groceries','bud-hiburan','bud-bil']
-  const nb=cats.map((cat,i)=>({user_id:currentUser.id,category:cat,limit_amount:parseFloat(document.getElementById(ids[i]).value)||0})).filter(b=>b.limit_amount>0)
+  const nb=cats.map((cat,i)=>({user_id:currentUser.id,profile_id:currentProfile.id,category:cat,limit_amount:parseFloat(document.getElementById(ids[i]).value)||0})).filter(b=>b.limit_amount>0)
   if(nb.length>0) await sb.from('budgets').insert(nb)
-  await loadBudgets();document.getElementById('greeting').textContent='Helo, '+(name||currentUser.email.split('@')[0])+' ✨';renderHome();showMsg(msgEl,'Settings saved! ✓','ok')
+
+  await loadBudgets()
+  renderProfileUI()
+  renderHome()
+  showMsg(msgEl,'Settings saved! ✓','ok')
 }
 
 // ===== NAV =====
@@ -1052,6 +1101,156 @@ async function checkForUpdate() {
 }
 
 initAppInfo()
+// ===== PROFILES =====
+async function loadProfiles() {
+  const { data } = await sb.from('user_profiles').select('*').eq('user_id', currentUser.id).order('created_at')
+  allProfiles = data || []
+
+  // Kalau takde profile langsung, create default dari data lama
+  if (allProfiles.length === 0) {
+    const { data: p } = await sb.from('profiles').select('*').eq('id', currentUser.id).single()
+    const { data: newP } = await sb.from('user_profiles').insert({
+      user_id: currentUser.id,
+      name: p?.name || currentUser.email.split('@')[0],
+      salary: p?.salary || 0,
+      saving_goal: p?.saving_goal || 0,
+      avatar: '👤',
+      is_default: true
+    }).select().single()
+    allProfiles = [newP]
+  }
+
+  // Load last active profile dari localStorage
+  const savedId = localStorage.getItem('duitku-active-profile-' + currentUser.id)
+  currentProfile = allProfiles.find(p => p.id === savedId) || allProfiles[0]
+
+  renderProfileUI()
+}
+
+function renderProfileUI() {
+  if (!currentProfile) return
+
+  // Update greeting
+  document.getElementById('greeting').textContent = 'Helo, ' + currentProfile.name + ' ✨'
+
+  // Show switch button kalau ada lebih dari 1 profile
+  const switchBtn = document.getElementById('profile-switch-btn')
+  if (switchBtn) switchBtn.style.display = allProfiles.length > 1 ? 'inline-block' : 'none'
+
+  // Update settings form
+  document.getElementById('set-name').value = currentProfile.name || ''
+  document.getElementById('set-salary').value = currentProfile.salary || ''
+  document.getElementById('set-goal').value = currentProfile.saving_goal || ''
+  document.getElementById('set-avatar-display').textContent = currentProfile.avatar || '👤'
+  document.getElementById('set-profile-name-display').textContent = currentProfile.name
+  selectedEditAvatar = currentProfile.avatar || '👤'
+
+  // Render profile list in settings
+  renderProfileListSettings()
+}
+
+function renderProfileListSettings() {
+  const el = document.getElementById('profile-list-settings')
+  if (!el) return
+
+  const addBtn = document.getElementById('add-profile-btn')
+  if (addBtn) addBtn.style.display = allProfiles.length >= 2 ? 'none' : 'inline-block'
+
+  el.innerHTML = allProfiles.map(p => `
+    <div style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;border:1.5px solid ${p.id === currentProfile?.id ? 'var(--accent)' : 'var(--border)'};background:${p.id === currentProfile?.id ? 'var(--accent-light)' : 'var(--surface)'}">
+      <div style="font-size:22px">${p.avatar || '👤'}</div>
+      <div style="flex:1">
+        <div style="font-size:12px;font-weight:700;color:var(--ink)">${p.name}</div>
+        <div style="font-size:10px;color:var(--muted)">Gaji: RM ${p.salary || 0} · Goal: RM ${p.saving_goal || 0}</div>
+      </div>
+      ${p.id === currentProfile?.id
+        ? '<span style="font-size:10px;font-weight:700;color:var(--accent);background:var(--accent-light);padding:2px 8px;border-radius:8px;border:1.5px solid var(--accent)">Aktif</span>'
+        : `<button onclick="confirmSwitchProfile('${p.id}')" style="background:var(--surface);border:1.5px solid var(--border2);border-radius:8px;padding:4px 10px;font-size:10px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Nunito',sans-serif">Switch</button>`
+      }
+    </div>
+  `).join('')
+}
+
+function showProfileSwitch() {
+  const el = document.getElementById('switch-profile-list')
+  el.innerHTML = allProfiles.map(p => `
+    <div style="display:flex;align-items:center;gap:10px;padding:12px;border-radius:14px;border:1.5px solid ${p.id === currentProfile?.id ? 'var(--accent)' : 'var(--border)'};background:${p.id === currentProfile?.id ? 'var(--accent-light)' : 'var(--surface)'}">
+      <div style="font-size:26px">${p.avatar || '👤'}</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:700;color:var(--ink)">${p.name}</div>
+        <div style="font-size:10px;color:var(--muted)">Saving goal: RM ${p.saving_goal || 0}</div>
+      </div>
+      ${p.id === currentProfile?.id
+        ? '<span style="font-size:10px;font-weight:700;color:var(--accent)">✓ Aktif</span>'
+        : `<button onclick="confirmSwitchProfile('${p.id}')" style="background:var(--accent);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif">Pilih</button>`
+      }
+    </div>
+  `).join('')
+  document.getElementById('switch-profile-modal').classList.add('show')
+}
+
+function confirmSwitchProfile(profileId) {
+  const target = allProfiles.find(p => p.id === profileId)
+  if (!target) return
+  if (confirm(`Switch ke profile "${target.name}"?`)) {
+    currentProfile = target
+    localStorage.setItem('duitku-active-profile-' + currentUser.id, profileId)
+    hideModal('switch-profile-modal')
+    renderProfileUI()
+    loadTransactions().then(() => { loadBudgets(); renderHome() })
+    if (document.getElementById('tab-history').style.display !== 'none') renderHistory()
+  }
+}
+
+function showAddProfileModal() {
+  if (allProfiles.length >= 2) { alert('Max 2 profiles je!'); return }
+  document.getElementById('new-profile-name').value = ''
+  document.getElementById('new-profile-salary').value = ''
+  document.getElementById('new-profile-goal').value = ''
+  document.getElementById('add-profile-msg').innerHTML = ''
+  selectedNewAvatar = '👤'
+  document.getElementById('new-avatar-preview').textContent = 'Avatar: 👤'
+  document.getElementById('add-profile-modal').classList.add('show')
+}
+
+function selectNewAvatar(emoji) {
+  selectedNewAvatar = emoji
+  document.getElementById('new-avatar-preview').textContent = 'Avatar: ' + emoji
+  document.querySelectorAll('#add-profile-modal span[onclick]').forEach(s => s.style.background = 'none')
+  event.target.style.background = 'var(--accent-light)'
+}
+
+function toggleAvatarPicker() {
+  const picker = document.getElementById('avatar-picker')
+  picker.style.display = picker.style.display === 'none' ? 'flex' : 'none'
+}
+
+function selectAvatar(emoji) {
+  selectedEditAvatar = emoji
+  document.getElementById('set-avatar-display').textContent = emoji
+  document.getElementById('avatar-picker').style.display = 'none'
+}
+
+async function saveNewProfile() {
+  const name = document.getElementById('new-profile-name').value.trim()
+  const salary = parseFloat(document.getElementById('new-profile-salary').value) || 0
+  const goal = parseFloat(document.getElementById('new-profile-goal').value) || 0
+  const msgEl = document.getElementById('add-profile-msg')
+
+  if (!name) { showMsg(msgEl, 'Masukkan nama profile!', 'err'); return }
+
+  const { data, error } = await sb.from('user_profiles').insert({
+    user_id: currentUser.id, name, salary, saving_goal: goal, avatar: selectedNewAvatar, is_default: false
+  }).select().single()
+
+  if (error) { showMsg(msgEl, error.message, 'err'); return }
+
+  allProfiles.push(data)
+  hideModal('add-profile-modal')
+  renderProfileListSettings()
+  const switchBtn = document.getElementById('profile-switch-btn')
+  if (switchBtn) switchBtn.style.display = 'inline-block'
+}
 // ===== INIT =====
 ;(async()=>{
   const hash=window.location.hash,params=new URLSearchParams(hash.replace('#','?'))
@@ -1073,5 +1272,36 @@ window.addEventListener('keydown',e=>{
   if(active.id==='screen-reset') updatePassword()
 })
 </script>
+  <!-- ADD PROFILE MODAL -->
+<div class="overlay" id="add-profile-modal">
+  <div class="modal">
+    <div class="modal-title">Tambah Profile Baru 👤 <button class="modal-close" onclick="hideModal('add-profile-modal')">×</button></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
+      <span onclick="selectNewAvatar('👤')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">👤</span>
+      <span onclick="selectNewAvatar('👨')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">👨</span>
+      <span onclick="selectNewAvatar('👩')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">👩</span>
+      <span onclick="selectNewAvatar('🧑')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">🧑</span>
+      <span onclick="selectNewAvatar('👦')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">👦</span>
+      <span onclick="selectNewAvatar('👧')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">👧</span>
+      <span onclick="selectNewAvatar('🐱')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">🐱</span>
+      <span onclick="selectNewAvatar('🐶')" style="font-size:22px;cursor:pointer;padding:6px;border-radius:10px;border:1.5px solid var(--border)">🐶</span>
+    </div>
+    <div id="new-avatar-preview" style="font-size:10px;color:var(--muted);margin-bottom:10px">Avatar: 👤</div>
+    <div class="form-field"><label class="form-label">Nama Profile</label><input class="form-input" id="new-profile-name" placeholder="e.g. Yaya, Hubby"></div>
+    <div class="form-field"><label class="form-label">Gaji bulanan (RM)</label><input class="form-input" id="new-profile-salary" type="number" placeholder="0.00"></div>
+    <div class="form-field"><label class="form-label">Saving goal (RM)</label><input class="form-input" id="new-profile-goal" type="number" placeholder="0.00"></div>
+    <div id="add-profile-msg"></div>
+    <button class="action-btn" onclick="saveNewProfile()">Simpan Profile ✓</button>
+  </div>
+</div>
+
+<!-- SWITCH PROFILE MODAL -->
+<div class="overlay" id="switch-profile-modal">
+  <div class="modal">
+    <div class="modal-title">Switch Profile ⇄ <button class="modal-close" onclick="hideModal('switch-profile-modal')">×</button></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Pilih profile yang nak digunakan:</div>
+    <div id="switch-profile-list" style="display:flex;flex-direction:column;gap:8px"></div>
+  </div>
+</div>
 </body>
 </html>
